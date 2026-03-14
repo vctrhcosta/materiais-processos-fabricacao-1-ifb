@@ -73,11 +73,12 @@
   {\thesubparagraph\quad}
   {0em}{}[\hspace{0.5em}]
 
-% Espaçamento das seções (ABNT: separado do texto seguinte por 1,5)
-\titlespacing*{\section}      {0pt}{0pt}{0pt}
-\titlespacing*{\subsection}   {0pt}{0pt}{0pt}
-\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
-\titlespacing*{\paragraph}    {0pt}{0pt}{0pt}
+% Espaçamento das seções — ABNT NBR 14724: separado do texto por linha em branco
+% \titlespacing*{cmd}{left}{before-sep}{after-sep}
+\titlespacing*{\section}      {0pt}{18pt}{12pt}
+\titlespacing*{\subsection}   {0pt}{18pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}    {0pt}{12pt}{0pt}
 
 % Seções primárias iniciam em nova página
 \newcommand{\secbreak}{\clearpage}
@@ -132,8 +133,33 @@
 \usepackage{enumitem}
 \setlist{nosep, leftmargin=*}
 
+% ── Sumário e Lista de Quadros (ABNT) ────────────────────────────────────────
+\usepackage{tocloft}
+\renewcommand{\contentsname}{SUMÁRIO}
+% Lista de quadros personalizada
+\newlistof{quadros}{loq}{LISTA DE QUADROS}
+\setlength{\cftquadrosindent}{0pt}
+\setlength{\cftquadrosnumwidth}{0pt}
+\makeatletter
+\renewcommand{\listofquadros}{%
+  \section*{LISTA DE QUADROS}%
+  \@starttoc{loq}%
+}
+\makeatother
+% Título do sumário e da lista no mesmo estilo das seções (12pt, negrito)
+% Comando: imprime o título em negrito E registra na lista (com número de página)
+\newcommand{\quadrotitle}[2]{%
+  \vspace{1em}%
+  \phantomsection\label{quadro#1}%
+  \addcontentsline{loq}{quadros}{Quadro #1 --- #2}%
+  \noindent\textbf{Quadro #1 --- #2}\par\vspace{0.3em}%
+}
+% Linha de fonte do quadro: itálico + espaço após
+\newcommand{\quadrofonte}[1]{\par\noindent\textit{Fonte: #1}\vspace{1em}\par}
+
 % ── Hyperlinks ───────────────────────────────────────────────────────────────
-\usepackage[hidelinks, colorlinks=false]{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks, colorlinks=false, breaklinks=true]{hyperref}
 
 % ── Citações longas (>3 linhas): 10pt, simples, recuo 4cm ────────────────────
 \usepackage{quoting}
@@ -163,81 +189,175 @@
 \begin{document}
 % ─────────────────────────────────────────────────────────────────────────────
 
-% ── Elementos Pré-Textuais (adicionar manualmente conforme NBR 14724/2024) ───
-% CAPA, FOLHA DE ROSTO, FICHA CATALOGRÁFICA (verso), FOLHA DE APROVAÇÃO,
-% DEDICATÓRIA, AGRADECIMENTOS, EPÍGRAFE, RESUMO, ABSTRACT, LISTAS, SUMÁRIO
+% ══════════════════════════════════════════════════════════════════════════════
+% CAPA — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
 
-% ── Elementos Textuais ───────────────────────────────────────────────────────
-\section{ELEMENTOS PRÉ-TEXTUAIS --- PREENCHER ANTES DA ENTREGA (NBR
-14724/2024)}\label{elementos-pruxe9-textuais-preencher-antes-da-entrega-nbr-147242024}
+    % ── Logo IFB + Design de Produto ─────────────────────────────────────────
+    \includegraphics[width=0.4\textwidth]{ifb_vs_dp.png}\\[1.8em]
 
-\begin{quote}
-\textbf{CAPA} (Obrigatório) - Logotipo da instituição - Nome da
-instituição: Instituto Federal de Educação, Ciência e Tecnologia de
-Brasília --- IFB - \emph{Campus}: {[}informar campus{]} - Curso:
-{[}informar nome do curso{]} - Nome do(a) autor(a): {[}NOME COMPLETO EM
-MAIÚSCULAS{]} - Título: {[}TÍTULO DO TRABALHO EM MAIÚSCULAS{]} -
-Subtítulo (se houver): {[}subtítulo em caixa baixa{]} - Local
-(cidade/UF): Brasília/DF - Ano de entrega: {[}AAAA{]}
-\end{quote}
+    % ── Identificação institucional (topo) ────────────────────────────────────
+    {\normalsize\bfseries
+      Instituto Federal de Educação, Ciência e Tecnologia de Brasília --- IFB\\[0.3em]
+      \textit{Campus} Samambaia\\[0.3em]
+      Curso Superior de Tecnologia em Design de Produto
+    }
 
-\begin{quote}
-\textbf{FOLHA DE ROSTO} (Obrigatório) --- \emph{NBR 14724/2024} - Nome
-do(a) autor(a): {[}NOME COMPLETO{]} - Título do trabalho: {[}TÍTULO{]} -
-Natureza do trabalho: {[}Monografia/Dissertação/Tese{]} apresentada ao
-{[}Curso{]} do {[}Campus{]} do Instituto Federal de Brasília como
-requisito parcial para obtenção do título de {[}titulação{]}. (Recuo 8
-cm da margem esquerda) - Orientador(a): {[}Prof./Profª. titulação Nome
-Sobrenome{]} - Local (cidade/UF): Brasília/DF - Ano: {[}AAAA{]}
-\end{quote}
+    % ── Espaço central ────────────────────────────────────────────────────────
+    \vfill
 
-\begin{quote}
-\textbf{FICHA CATALOGRÁFICA} (Obrigatório) --- verso da folha de rosto,
-retângulo 7,5 × 12,5 cm Elaborada por bibliotecário(a) com CRB.
-Solicitar à Biblioteca do IFB.
-\end{quote}
+    % ── Título (MAIÚSCULAS, negrito) ──────────────────────────────────────────
+    {\large\bfseries
+      INDÚSTRIA DE TINTAS E PIGMENTOS NO BRASIL
+    }\\[1.2em]
 
-\begin{quote}
-\textbf{FOLHA DE APROVAÇÃO} (Obrigatório) Incluir após defesa: data de
-aprovação, nomes, titulações e assinaturas dos membros da banca.
-\end{quote}
+    % ── Subtítulo (caixa baixa) ───────────────────────────────────────────────
+    {\normalsize
+      Nichos produtivos, matérias-primas e processos de fabricação\\
+      na perspectiva da indústria de transformação brasileira.
+    }
 
-\begin{quote}
-\textbf{RESUMO} (Obrigatório --- 150 a 500 palavras)
+    \vfill
 
-{[}Parágrafo único com: objetivos, metodologia, resultados e conclusões.
-Verbo na 3ª pessoa do singular.{]}
+    % ── Local e ano (rodapé da capa) ──────────────────────────────────────────
+    {\normalsize Brasília/DF\\2026}
 
-\textbf{Palavras-chave:} {[}palavra 1{]}; {[}palavra 2{]}; {[}palavra
-3{]}; {[}palavra 4{]}; {[}palavra 5{]}.
-\end{quote}
+  \end{center}
+\end{titlepage}
+\setcounter{page}{2} % contagem inicia na folha de rosto (NBR 14724)
 
-\begin{quote}
-\textbf{ABSTRACT} (Obrigatório --- 150 to 500 words)
+% ══════════════════════════════════════════════════════════════════════════════
+% FOLHA DE ROSTO — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
 
-{[}Same content as Resumo, in English.{]}
+    % ── Autor ─────────────────────────────────────────────────────────────────
+    {\normalsize\bfseries VICTOR HUGO DA SILVA COSTA}
 
-\textbf{Keywords:} {[}keyword 1{]}; {[}keyword 2{]}; {[}keyword 3{]};
-{[}keyword 4{]}; {[}keyword 5{]}.
-\end{quote}
+    \vfill
 
-\begin{quote}
-\textbf{LISTA DE QUADROS} (Obrigatório --- há 19 Quadros neste trabalho)
-Quadro 1 --- Indicadores de posicionamento do Brasil na indústria de
-tintas (2025) \ldots\ldots\ldots. p.~{[}XX{]} {[}\ldots demais quadros
-na ordem de aparição no texto{]}
-\end{quote}
+    % ── Título ────────────────────────────────────────────────────────────────
+    {\large\bfseries INDÚSTRIA DE TINTAS E PIGMENTOS NO BRASIL}
 
-\begin{quote}
-\textbf{SUMÁRIO} (Obrigatório) 1 INTRODUÇÃO: CONTEXTUALIZAÇÃO DO SETOR
-NA INDÚSTRIA DE TRANSFORMAÇÃO BRASILEIRA \ldots\ldots\ldots{}
-p.~{[}XX{]} 1.1 Posicionamento do Brasil no Cenário Global
-\ldots\ldots\ldots{} p.~{[}XX{]} 2 ESTRUTURA DA CADEIA PRODUTIVA
-\ldots\ldots\ldots{} p.~{[}XX{]} {[}\ldots demais seções{]} REFERÊNCIAS
-\ldots\ldots\ldots{} p.~{[}XX{]}
-\end{quote}
+    \vfill
 
-\section{1 INTRODUÇÃO: CONTEXTUALIZAÇÃO DO SETOR NA INDÚSTRIA DE
+    % ── Nota de apresentação (alinhada à direita, ~8cm de largura) ───────────
+    \begin{flushright}
+      \begin{minipage}{0.5\textwidth}
+        \normalsize
+        Relatório apresentado ao Curso Superior de Tecnologia em Design de
+        Produto do Instituto Federal de Educação, Ciência e Tecnologia de
+        Brasília -- IFB -- \textit{Campus} Samambaia, como requisito parcial
+        para a aprovação na disciplina de Materiais e Processos de Fabricação~I.
+
+        \vspace{1em}
+        Profª.\ Keila Sanches
+      \end{minipage}
+    \end{flushright}
+
+    \vfill
+
+    % ── Local e ano ───────────────────────────────────────────────────────────
+    {\normalsize Brasília/DF -- 2026}
+
+  \end{center}
+\end{titlepage}
+
+% ── Demais Elementos Pré-Textuais (adicionar manualmente antes da entrega) ───
+% FICHA CATALOGRÁFICA (verso da folha de rosto), FOLHA DE APROVAÇÃO, LISTAS, SUMÁRIO
+
+% ══════════════════════════════════════════════════════════════════════════════
+% RESUMO — NBR 6028/2003
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+  {\normalsize\bfseries RESUMO}
+\end{center}
+
+\vspace{1em}
+\noindent
+O presente trabalho tem como objetivo analisar a indústria brasileira de tintas e pigmentos
+na perspectiva da indústria de transformação, identificando os nichos produtivos, as
+matérias-primas empregadas e os processos de fabricação característicos de cada segmento.
+A metodologia adotada consiste em pesquisa bibliográfica e documental, com base em dados
+setoriais da ABRAFATI, do Instituto Brasileiro de Geografia e Estatística (IBGE/PIA-Empresa),
+de relatórios de mercado da Grand View Research e da Mordor Intelligence, além de fontes
+técnicas especializadas. Os resultados indicam que o Brasil ocupa a 4ª posição no ranking
+mundial de produção de tintas, com 2,005 bilhões de litros produzidos em 2025, inserindo-se
+em um mercado global avaliado em USD 211,28 bilhões em 2024. O setor estrutura-se como elo
+intermediário entre as indústrias de base --- petroquímica, mineração e química fina --- e as
+indústrias usuárias, sendo classificado na Divisão 20 da CNAE 2.0. A formulação de tintas
+envolve quatro famílias de matérias-primas --- resinas, pigmentos, solventes e aditivos ---
+cujas combinações determinam os nichos produtivos identificados: imobiliário, industrial
+geral, automotivo, naval, tintas em pó, sistemas de cura UV/EB e tintas especiais e
+funcionais. Os processos de fabricação variam conforme o nicho, com destaque para a
+dispersão de pigmentos em moinhos de pérolas, a extrusão para tintas em pó e a
+fotopolimerização para sistemas de cura por radiação. Conclui-se que o setor apresenta
+elevado potencial de diversificação, com nichos estratégicos de alta oportunidade em
+anticorrosivos para o segmento offshore, tintas intumescentes, revestimentos para energias
+renováveis e sistemas base água, tendência impulsionada por regulamentações ambientais e
+pela crescente demanda ESG.
+
+\vspace{1em}
+\noindent\textbf{Palavras-chave:} tintas industriais; pigmentos; processos de fabricação; indústria de transformação; nichos produtivos.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% ABSTRACT — NBR 6028/2003
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+  {\normalsize\bfseries ABSTRACT}
+\end{center}
+
+\vspace{1em}
+\noindent
+This paper aims to analyze the Brazilian paint and pigment industry from the perspective of
+the manufacturing industry, identifying productive niches, raw materials, and manufacturing
+processes characteristic of each segment. The methodology consists of bibliographic and
+documentary research, based on sectoral data from ABRAFATI, the Brazilian Institute of
+Geography and Statistics (IBGE/PIA-Empresa), market reports from Grand View Research and
+Mordor Intelligence, and specialized technical sources. The results indicate that Brazil
+ranks 4th in the global paint production ranking, with 2.005 billion liters produced in 2025,
+within a global market valued at USD 211.28 billion in 2024. The sector is structured as an
+intermediate link between base industries --- petrochemical, mining, and fine chemistry --- and
+end-user industries, classified under Division 20 of Brazil's National Classification of
+Economic Activities (CNAE 2.0). Paint formulation involves four families of raw materials ---
+resins, pigments, solvents, and additives --- whose combinations define the productive niches
+identified: residential, general industrial, automotive, naval, powder coatings, UV/EB curing
+systems, and specialty and functional paints. Manufacturing processes vary by niche, with
+emphasis on pigment dispersion in bead mills, extrusion for powder coatings, and
+photopolymerization for radiation-curing systems. It is concluded that the sector presents
+high diversification potential, with strategic high-opportunity niches in anticorrosive
+coatings for the offshore segment, intumescent paints, renewable energy coatings, and
+waterborne systems, a trend driven by environmental regulations and growing ESG demand.
+
+\vspace{1em}
+\noindent\textbf{Keywords:} industrial paints; pigments; manufacturing processes; manufacturing industry; productive niches.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% LISTA DE QUADROS — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\listofquadros
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SUMÁRIO — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+
+
+
+\section{INTRODUÇÃO: CONTEXTUALIZAÇÃO DO SETOR NA INDÚSTRIA DE
 TRANSFORMAÇÃO
 BRASILEIRA}\label{introduuxe7uxe3o-contextualizauxe7uxe3o-do-setor-na-induxfastria-de-transformauxe7uxe3o-brasileira}
 
@@ -254,14 +374,12 @@ pó, solventes, cargas minerais) são transformados, mediante processos
 físico-químicos controlados, em sistemas de proteção e decoração de
 superfícies amplamente utilizados por outros elos da cadeia industrial.
 
-\subsection{1.1 Posicionamento do Brasil no Cenário
-Global}\label{posicionamento-do-brasil-no-cenuxe1rio-global}
+\subsection{Posicionamento do Brasil no Cenário Global}\label{posicionamento-do-brasil-no-cenuxe1rio-global}
 
 O Quadro 1 sintetiza os principais indicadores de posicionamento do
 Brasil no setor de tintas:
 
-Quadro 1 --- Indicadores de posicionamento do Brasil na indústria de
-tintas (2025)
+\quadrotitle{1}{Indicadores de posicionamento do Brasil na indústria de tintas (2025)}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -291,7 +409,7 @@ litros/ano) \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 O mercado global de tintas e revestimentos foi avaliado em \textbf{USD
 211,28 bilhões em 2024 (GRAND VIEW RESEARCH, 2024)}, com projeção de
@@ -301,48 +419,35 @@ do mercado global (GRAND VIEW RESEARCH, 2024), mas a América Latina ---
 com destaque para o Brasil --- é um polo produtor estratégico,
 impulsionado pela indústria automotiva, construção civil e agronegócio.
 
-\section{2 ESTRUTURA DA CADEIA
+\section{ESTRUTURA DA CADEIA
 PRODUTIVA}\label{estrutura-da-cadeia-produtiva}
 
 A indústria de tintas é um \textbf{elo intermediário} na cadeia de
 transformação industrial. Sua lógica de funcionamento pode ser descrita
 em três camadas (ver Quadro 2):
 
-Quadro 2 --- Estrutura da cadeia produtiva da indústria de tintas e
-pigmentos
+\quadrotitle{2}{Estrutura da cadeia produtiva da indústria de tintas e pigmentos}
 
-\begin{verbatim}
-[INDÚSTRIAS DE BASE]
-  Petroquímica → Solventes, Monomeros, Resinas sintéticas
-  Mineração → TiO2, Óxidos de ferro, Carbonato de cálcio, Talco, Mica
-  Química fina → Pigmentos orgânicos, Aditivos especiais
-          ↓
-[INDÚSTRIA DE TRANSFORMAÇÃO - TINTAS E PIGMENTOS]
-  Formulação → Dispersão → Mistura → Controle de qualidade → Envase
-          ↓
-[INDÚSTRIAS USUÁRIAS / CONSUMO FINAL]
-  Construção civil · Automotivo · Metal-mecânica · Naval · Aeroespacial
-  Embalagens · Móveis e madeira · Agrícola/equipamentos · Consumidor final
-\end{verbatim}
+\begin{center}
+  \includegraphics[width=\linewidth]{figuras/quadro2-cadeia-produtiva.png}
+\end{center}
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\section{3 COMPOSIÇÃO TÉCNICA DAS
-TINTAS}\label{composiuxe7uxe3o-tuxe9cnica-das-tintas}
+\section{COMPOSIÇÃO TÉCNICA DAS TINTAS}\label{composiuxe7uxe3o-tuxe9cnica-das-tintas}
 
 Uma tinta é, essencialmente, um \textbf{sistema coloidal} composto por
 quatro famílias de matérias-primas, cada qual desempenhando função
 específica:
 
-\subsection{3.1 Ligantes (Resinas) --- O Formador do
+\subsection{Ligantes (Resinas) --- O Formador do
 Filme}\label{ligantes-resinas-o-formador-do-filme}
 
 São o componente \textbf{obrigatório e mais nobre} das tintas. Formam a
 película protetora após a cura e determinam as propriedades mecânicas,
 químicas e de durabilidade (ver Quadro 3).
 
-Quadro 3 --- Tipos de resinas (ligantes) utilizados na formulação de
-tintas: características e aplicações típicas
+\quadrotitle{3}{Tipos de resinas (ligantes) utilizados na formulação de tintas: características e aplicações típicas}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -384,7 +489,7 @@ ultra-rápida por evaporação \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 \textbf{Tendência dominante:} Resinas acrílicas respondem por
 \textasciitilde35,78\% do mercado global (MORDOR INTELLIGENCE, 2026).
@@ -392,22 +497,21 @@ Sistemas base água já controlam mais de 50\% do mercado em volume
 (MORDOR INTELLIGENCE, 2026), impulsionados por regulamentações
 ambientais.
 
-\subsection{3.2 Pigmentos --- Cor, Opacidade e
+\subsection{Pigmentos --- Cor, Opacidade e
 Função}\label{pigmentos-cor-opacidade-e-funuxe7uxe3o}
 
 Os pigmentos são partículas sólidas, finamente divididas, responsáveis
 pela \textbf{cor, poder de cobertura, resistência à intempérie e
 propriedades funcionais} da tinta. Dividem-se em dois grandes grupos:
 
-\subsubsection{3.2.1 Pigmentos
+\subsubsection{Pigmentos
 Inorgânicos}\label{pigmentos-inorguxe2nicos}
 
 Os principais pigmentos inorgânicos utilizados na indústria de tintas,
 suas origens minerais e processos de fabricação estão descritos no
 Quadro 4:
 
-Quadro 4 --- Pigmentos inorgânicos: matéria-prima de origem e processo
-de fabricação
+\quadrotitle{4}{Pigmentos inorgânicos: matéria-prima de origem e processo de fabricação}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -451,17 +555,16 @@ Reação de precipitação dupla \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsubsection{3.2.2 Pigmentos Orgânicos}\label{pigmentos-orguxe2nicos}
+\subsubsection{Pigmentos Orgânicos}\label{pigmentos-orguxe2nicos}
 
 São compostos de síntese orgânica, obtidos majoritariamente da
 petroquímica. Oferecem \textbf{alta intensidade de cor e transparência},
 sendo amplamente usados em tintas automotivas e industriais (ver Quadro
 5).
 
-Quadro 5 --- Pigmentos orgânicos: classes, exemplos de compostos e
-processos de síntese
+\quadrotitle{5}{Pigmentos orgânicos: classes, exemplos de compostos e processos de síntese}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -498,16 +601,15 @@ orgânica de precisão \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsubsection{3.2.3 Pigmentos Funcionais
+\subsubsection{Pigmentos Funcionais
 (Especiais)}\label{pigmentos-funcionais-especiais}
 
 Os pigmentos funcionais especiais, suas funções e aplicações industriais
 estão sistematizados no Quadro 6:
 
-Quadro 6 --- Pigmentos funcionais especiais: tipo, função e aplicações
-industriais
+\quadrotitle{6}{Pigmentos funcionais especiais: tipo, função e aplicações industriais}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -541,9 +643,9 @@ ambientes úmidos \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsection{3.3 Solventes e Veículos --- O Meio de
+\subsection{Solventes e Veículos --- O Meio de
 Aplicação}\label{solventes-e-veuxedculos-o-meio-de-aplicauxe7uxe3o}
 
 Responsáveis por ajustar a \textbf{viscosidade e trabalhabilidade}, não
@@ -551,8 +653,7 @@ integram o filme final (evaporam após aplicação). Representam um dos
 maiores custos e um dos principais focos de redução ambiental (COV ---
 Compostos Orgânicos Voláteis) (ver Quadro 7).
 
-Quadro 7 --- Solventes e veículos utilizados em tintas: categoria, base
-química e uso típico
+\quadrotitle{7}{Solventes e veículos utilizados em tintas: categoria, base química e uso típico}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -590,17 +691,16 @@ primers de alto desempenho \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsection{3.4 Cargas Minerais (Extenders) --- Volume e
+\subsection{Cargas Minerais (Extenders) --- Volume e
 Reologia}\label{cargas-minerais-extenders-volume-e-reologia}
 
 Matérias-primas minerais de menor custo que complementam os pigmentos,
 ajustando consistência, textura e espessura de película sem contribuir
 com opacidade (ver Quadro 8):
 
-Quadro 8 --- Cargas minerais (\emph{extenders}): origem mineral e função
-na formulação de tintas
+\quadrotitle{8}{Cargas minerais (\emph{extenders}): origem mineral e função na formulação de tintas}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -631,13 +731,13 @@ anti-sedimentação \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 \textbf{O Brasil possui amplas reservas} de carbonato de cálcio, caulim,
 talco e barita, conferindo vantagem competitiva à cadeia produtiva
 nacional.
 
-\subsection{3.5 Aditivos --- Engenharia de
+\subsection{Aditivos --- Engenharia de
 Performance}\label{aditivos-engenharia-de-performance}
 
 Incorporados em pequenas quantidades (0,1--3\%), os aditivos são
@@ -645,7 +745,7 @@ responsáveis por \textbf{propriedades críticas de desempenho} e
 representam o segmento de maior valor agregado por quilograma (ver
 Quadro 9):
 
-Quadro 9 --- Classes de aditivos para tintas, funções e exemplos de uso
+\quadrotitle{9}{Classes de aditivos para tintas, funções e exemplos de uso}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -686,12 +786,12 @@ intumescentes, proteção passiva \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\section{4 NICHOS PRODUTIVOS
+\section{NICHOS PRODUTIVOS
 INDUSTRIAIS}\label{nichos-produtivos-industriais}
 
-\subsection{4.1 Tintas imobiliárias
+\subsection{Tintas imobiliárias
 (arquitetural)}\label{tintas-imobiliuxe1rias-arquitetural}
 
 O maior segmento do setor, dominante em volume, com
@@ -699,7 +799,7 @@ O maior segmento do setor, dominante em volume, com
 Programa Setorial de Qualidade (PSQ/ABRAFATI) (ABRAFATI, 2025).
 Subdivisões:
 
-\subsubsection{4.1.1 Tintas Látex / Base
+\subsubsection{Tintas Látex / Base
 Água}\label{tintas-luxe1tex-base-uxe1gua}
 
 \begin{itemize}
@@ -741,7 +841,7 @@ Subdivisões:
   premium acrílicas, texturas e grafiatos
 \end{itemize}
 
-\subsubsection{4.1.2 Esmaltes Sintéticos (Base
+\subsubsection{Esmaltes Sintéticos (Base
 Solvente)}\label{esmaltes-sintuxe9ticos-base-solvente}
 
 \begin{itemize}
@@ -756,7 +856,7 @@ Solvente)}\label{esmaltes-sintuxe9ticos-base-solvente}
   filtração
 \end{itemize}
 
-\subsubsection{4.1.3 Texturas e Revestimentos
+\subsubsection{Texturas e Revestimentos
 Decorativos}\label{texturas-e-revestimentos-decorativos}
 
 \begin{itemize}
@@ -769,10 +869,10 @@ Decorativos}\label{texturas-e-revestimentos-decorativos}
   kg
 \end{itemize}
 
-\subsection{4.2 Tintas industriais
+\subsection{Tintas industriais
 gerais}\label{tintas-industriais-gerais}
 
-\subsubsection{4.2.1 Anticorrosivas e
+\subsubsection{Anticorrosivas e
 Primers}\label{anticorrosivas-e-primers}
 
 \textbf{Um dos nichos de maior valor agregado}, essencial para
@@ -830,7 +930,7 @@ infraestrutura, indústria pesada, petróleo \& gás e construção metálica.
   \end{itemize}
 \end{itemize}
 
-\subsubsection{4.2.2 Tintas de Piso e Pisos
+\subsubsection{Tintas de Piso e Pisos
 Industriais}\label{tintas-de-piso-e-pisos-industriais}
 
 \begin{itemize}
@@ -845,7 +945,7 @@ Industriais}\label{tintas-de-piso-e-pisos-industriais}
   \textbf{Processo:} Similar ao anticorrosivo, com maior teor de sólidos
 \end{itemize}
 
-\subsubsection{4.2.3 Tintas Intumescentes (Proteção Passiva ao
+\subsubsection{Tintas Intumescentes (Proteção Passiva ao
 Fogo)}\label{tintas-intumescentes-proteuxe7uxe3o-passiva-ao-fogo}
 
 \begin{itemize}
@@ -863,7 +963,7 @@ Fogo)}\label{tintas-intumescentes-proteuxe7uxe3o-passiva-ao-fogo}
   offshore, galpões industriais
 \end{itemize}
 
-\subsection{4.3 Tintas automotivas}\label{tintas-automotivas}
+\subsection{Tintas automotivas}\label{tintas-automotivas}
 
 Nicho de altíssima tecnologia e qualidade, estruturado em
 \textbf{sistemas de pintura multicamadas}:
@@ -871,22 +971,16 @@ Nicho de altíssima tecnologia e qualidade, estruturado em
 \textbf{Arquitetura do Sistema Automotivo OEM (Original Equipment
 Manufacturer)} (ver Quadro 10):
 
-Quadro 10 --- Arquitetura do sistema de pintura automotiva OEM
-(multicamadas)
+\quadrotitle{10}{Arquitetura do sistema de pintura automotiva OEM (multicamadas)}
 
-\begin{verbatim}
-Substrato metálico
-  → Fosfatização (pré-tratamento)
-  → *E-coat* / Cataforese (primer eletroforeticamente depositado)
-  → Primer surfacer / Fundo (correção dimensional)
-  → *Base coat* (cor) — base água ou solvente
-  → *Clear coat* (verniz transparente) — cura UV ou isocianato
-\end{verbatim}
+\begin{center}
+  \includegraphics[width=\linewidth]{figuras/quadro10-oem-automotivo.png}
+\end{center}
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsubsection{\texorpdfstring{4.3.1 Cataforese
-(\emph{E-coat})}{4.3.1 Cataforese (E-coat)}}\label{cataforese-e-coat}
+\subsubsection{\texorpdfstring{Cataforese
+(\emph{E-coat})}{Cataforese (E-coat)}}\label{cataforese-e-coat}
 
 \begin{itemize}
 \tightlist
@@ -904,7 +998,7 @@ Fonte: elaborado pelo autor.
   tecnologia dominada por poucos fornecedores (BASF, PPG, Axalta)
 \end{itemize}
 
-\subsubsection{4.3.2 Tintas Base Coat
+\subsubsection{Tintas Base Coat
 Automotivas}\label{tintas-base-coat-automotivas}
 
 \begin{itemize}
@@ -930,7 +1024,7 @@ Automotivas}\label{tintas-base-coat-automotivas}
   solvente por regulamentação ambiental (VOC)
 \end{itemize}
 
-\subsubsection{4.3.3 Verniz Clear Coat}\label{verniz-clear-coat}
+\subsubsection{Verniz Clear Coat}\label{verniz-clear-coat}
 
 \begin{itemize}
 \tightlist
@@ -944,7 +1038,7 @@ Automotivas}\label{tintas-base-coat-automotivas}
   por calor)
 \end{itemize}
 
-\subsubsection{4.3.4 Tintas de Repintura Automotiva
+\subsubsection{Tintas de Repintura Automotiva
 (Refinish)}\label{tintas-de-repintura-automotiva-refinish}
 
 \begin{itemize}
@@ -961,15 +1055,14 @@ Automotivas}\label{tintas-base-coat-automotivas}
   envelhecida e acidentes
 \end{itemize}
 
-\subsection{4.4 Tintas naval e marinha}\label{tintas-naval-e-marinha}
+\subsection{Tintas naval e marinha}\label{tintas-naval-e-marinha}
 
 Nicho especializado com demanda crescente da indústria offshore
 brasileira (pré-sal), estaleiros e embarcações fluviais/marítimas.
 
 \textbf{Sistemas de Pintura Naval} (ver Quadro 11):
 
-Quadro 11 --- Sistemas de pintura naval: camadas, tipos de tinta e
-funções principais
+\quadrotitle{11}{Sistemas de pintura naval: camadas, tipos de tinta e funções principais}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1003,14 +1096,14 @@ base solvente, pigmentos estáveis à intempérie \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 \textbf{O Brasil} possui 7.400 km de costa, a maior frota
 \emph{offshore} de petróleo do hemisfério sul (ABRAFATI, 2025) e
 extensas hidrovias interiores --- mercado estratégico para tintas
 navais.
 
-\subsection{\texorpdfstring{4.5 Tintas em pó (\emph{powder
+\subsection{\texorpdfstring{Tintas em pó (\emph{powder
 coatings})}{4.5 Tintas em pó (powder coatings)}}\label{tintas-em-puxf3-powder-coatings}
 
 Nicho de crescimento acelerado no Brasil, especialmente na
@@ -1062,7 +1155,7 @@ linha branca}.
   tribo) → cura em forno 160-220°C
 \end{itemize}
 
-\subsection{4.6 Tintas UV/EB (cura por
+\subsection{Tintas UV/EB (cura por
 radiação)}\label{tintas-uveb-cura-por-radiauxe7uxe3o}
 
 \begin{itemize}
@@ -1093,10 +1186,10 @@ radiação)}\label{tintas-uveb-cura-por-radiauxe7uxe3o}
   gráficos, embalagens, eletroeletrônicos, pisos
 \end{itemize}
 
-\subsection{4.7 Tintas especiais e
+\subsection{Tintas especiais e
 funcionais}\label{tintas-especiais-e-funcionais}
 
-\subsubsection{4.7.1 Tintas de Alta
+\subsubsection{Tintas de Alta
 Temperatura}\label{tintas-de-alta-temperatura}
 
 \begin{itemize}
@@ -1110,7 +1203,7 @@ Temperatura}\label{tintas-de-alta-temperatura}
   chaminés, oleodutos (200--600°C)
 \end{itemize}
 
-\subsubsection{4.7.2 Tintas para Embalagens Metálicas (Can
+\subsubsection{Tintas para Embalagens Metálicas (Can
 Coatings)}\label{tintas-para-embalagens-metuxe1licas-can-coatings}
 
 \begin{itemize}
@@ -1126,7 +1219,7 @@ Coatings)}\label{tintas-para-embalagens-metuxe1licas-can-coatings}
   interno nas latas
 \end{itemize}
 
-\subsubsection{4.7.3 Tintas Eletroestáticas para Bobinas (Coil
+\subsubsection{Tintas Eletroestáticas para Bobinas (Coil
 Coatings)}\label{tintas-eletroestuxe1ticas-para-bobinas-coil-coatings}
 
 \begin{itemize}
@@ -1142,7 +1235,7 @@ Coatings)}\label{tintas-eletroestuxe1ticas-para-bobinas-coil-coatings}
   galvanizado, cura em fornos a \textasciitilde250°C
 \end{itemize}
 
-\subsubsection{4.7.4 Tintas Imunomarcantes e de
+\subsubsection{Tintas Imunomarcantes e de
 Segurança}\label{tintas-imunomarcantes-e-de-seguranuxe7a}
 
 \begin{itemize}
@@ -1155,8 +1248,7 @@ Segurança}\label{tintas-imunomarcantes-e-de-seguranuxe7a}
   anticontrafação, sinalização de emergência
 \end{itemize}
 
-\subsubsection{4.7.5 Tintas Anticorrosivas para Petróleo \&
-Gás}\label{tintas-anticorrosivas-para-petruxf3leo-guxe1s}
+\subsubsection{Tintas Anticorrosivas para Petróleo \& Gás}\label{tintas-anticorrosivas-para-petruxf3leo-guxe1s}
 
 \begin{itemize}
 \tightlist
@@ -1168,67 +1260,29 @@ Gás}\label{tintas-anticorrosivas-para-petruxf3leo-guxe1s}
   armazenamento
 \end{itemize}
 
-\section{5 PROCESSOS INDUSTRIAIS DE
+\section{PROCESSOS INDUSTRIAIS DE
 FABRICAÇÃO}\label{processos-industriais-de-fabricauxe7uxe3o}
 
-\subsection{5.1 Fluxograma Geral da Produção de
+\subsection{Fluxograma Geral da Produção de
 Tintas}\label{fluxograma-geral-da-produuxe7uxe3o-de-tintas}
 
 O Quadro 12 apresenta o fluxograma geral do processo industrial de
 fabricação de tintas:
 
-Quadro 12 --- Fluxograma geral do processo industrial de fabricação de
-tintas
+\quadrotitle{12}{Fluxograma geral do processo industrial de fabricação de tintas}
 
-\begin{verbatim}
-RECEBIMENTO E ARMAZENAGEM DE M.P.
-           ↓
-PESAGEM E DOSAGEM
-    (formulação controlada por sistema MES/ERP)
-           ↓
-PRÉ-DISPERSÃO
-    (Dissolvedor cowles — alta rotação)
-    → Pigmentos + cargas + dispersantes + parte do veículo
-           ↓
-MOAGEM / DISPERSÃO FINA
-    → Moinho de pérolas (*bead mill*) — tintas base água e industriais
-    → Moinho de rolos de três cilindros — tintas de offset, altos sólidos
-    → Dissolvedor de alto cisalhamento — tintas PVA, emulsões
-           ↓
-COMPLETAGEM / LET-DOWN
-    → Adição da resina principal, solventes, aditivos finais
-    → Agitação controlada
-           ↓
-AJUSTE E CONTROLE DE QUALIDADE
-    → Viscosidade (Krebs, ICI cone-plate)
-    → Grau de moagem (grindômetro Hegman)
-    → pH (tintas base água)
-    → Cor (espectrofotômetro)
-    → Poder de cobertura
-    → Brilho (glossímetro)
-    → Tempo de secagem
-    → Testes de estabilidade acelerada
-           ↓
-FILTRAÇÃO
-    (Filtros de cesto, sacas filtrantes — remoção de grumos)
-           ↓
-ENVASE E ROTULAGEM
-    → Latas de 3,6 L / 18 L (imobiliária)
-    → Baldes 20-25 kg (texturas)
-    → Bombonas e tambores (industrial)
-           ↓
-ESTOQUE E DISTRIBUIÇÃO
-\end{verbatim}
+\begin{center}
+  \includegraphics[width=0.85\linewidth]{figuras/quadro12-processo-fabricacao.png}
+\end{center}
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsection{5.2 Equipamentos Críticos}\label{equipamentos-cruxedticos}
+\subsection{Equipamentos Críticos}\label{equipamentos-cruxedticos}
 
 Os equipamentos críticos utilizados na produção industrial de tintas
 estão descritos no Quadro 13:
 
-Quadro 13 --- Equipamentos críticos na produção de tintas: função e
-nichos de aplicação
+\quadrotitle{13}{Equipamentos críticos na produção de tintas: função e nichos de aplicação}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1266,9 +1320,9 @@ plantas \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsection{5.3 Processo de Fabricação do Principal Pigmento:
+\subsection{Processo de Fabricação do Principal Pigmento:
 TiO₂}\label{processo-de-fabricauxe7uxe3o-do-principal-pigmento-tioux2082}
 
 O \textbf{dióxido de titânio (TiO₂)} é o pigmento mais importante da
@@ -1316,14 +1370,13 @@ Brasil possui reservas de ilmenita mas não possui planta industrial de
 TiO₂ --- o país importa principalmente de EUA, Alemanha e China (grandes
 fornecedores: Chemours, Venator, Kronos, Lomon Billions).
 
-\section{6 MAPA DE NICHOS × MATÉRIAS-PRIMAS ×
+\section{MAPA DE NICHOS × MATÉRIAS-PRIMAS ×
 PROCESSOS}\label{mapa-de-nichos-matuxe9rias-primas-processos}
 
 O Quadro 14 apresenta o mapeamento cruzado de nichos industriais com as
 respectivas matérias-primas e processos críticos:
 
-Quadro 14 --- Mapa de nichos industriais: resina principal, pigmentos,
-solvente e processo crítico
+\quadrotitle{14}{Mapa de nichos industriais: resina principal, pigmentos, solvente e processo crítico}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1373,12 +1426,12 @@ Intumescente & Acrílica/epóxi & TiO₂ + sistema intumescente & Base
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\section{7 PANORAMA DA INDÚSTRIA DE TRANSFORMAÇÃO NO
+\section{PANORAMA DA INDÚSTRIA DE TRANSFORMAÇÃO NO
 BRASIL}\label{panorama-da-induxfastria-de-transformauxe7uxe3o-no-brasil}
 
-\subsection{7.1 Estrutura de Mercado}\label{estrutura-de-mercado}
+\subsection{Estrutura de Mercado}\label{estrutura-de-mercado}
 
 \begin{itemize}
 \tightlist
@@ -1398,14 +1451,13 @@ BRASIL}\label{panorama-da-induxfastria-de-transformauxe7uxe3o-no-brasil}
   segmento imobiliário tem maior participação de empresas nacionais
 \end{itemize}
 
-\subsection{7.2 Distribuição Geográfica da
+\subsection{Distribuição Geográfica da
 Produção}\label{distribuiuxe7uxe3o-geogruxe1fica-da-produuxe7uxe3o}
 
 A distribuição regional da produção de tintas no Brasil está sintetizada
 no Quadro 15:
 
-Quadro 15 --- Distribuição geográfica da produção de tintas no Brasil
-por região
+\quadrotitle{15}{Distribuição geográfica da produção de tintas no Brasil por região}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1433,35 +1485,28 @@ crescente \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\subsection{7.3 Segmentação por Volume (Estimativa
+\subsection{Segmentação por Volume (Estimativa
 ABRAFATI)}\label{segmentauxe7uxe3o-por-volume-estimativa-abrafati}
 
 A segmentação do mercado brasileiro de tintas por volume é apresentada
 de forma estimada no Quadro 16:
 
-Quadro 16 --- Segmentação do mercado brasileiro de tintas por volume ---
-estimativa
+\quadrotitle{16}{Segmentação do mercado brasileiro de tintas por volume --- estimativa}
 
-\begin{verbatim}
-Tintas Imobiliárias (Arquitetural)  ████████████████████  ~80%
-Tintas Industriais Gerais           ████                  ~10%
-Tintas Automotivas                  ██                    ~5%
-Tintas em Pó                        █                     ~3%
-Outros (naval, aeroespacial, etc.)  █                     ~2%
-\end{verbatim}
+\begin{center}
+  \includegraphics[width=0.9\linewidth]{figuras/quadro16-segmentacao-volume.png}
+\end{center}
 
-Fonte: elaborado pelo autor, com base em ABRAFATI (2025).
+\quadrofonte{elaborado pelo autor, com base em ABRAFATI (2025).}
 
-\subsection{7.4 Principais Elos de Fornecimento de Matérias-Primas no
-Brasil}\label{principais-elos-de-fornecimento-de-matuxe9rias-primas-no-brasil}
+\subsection{Principais Elos de Fornecimento de Matérias-Primas no Brasil}\label{principais-elos-de-fornecimento-de-matuxe9rias-primas-no-brasil}
 
 O Quadro 17 lista os principais fornecedores de matérias-primas para a
 indústria de tintas no Brasil:
 
-Quadro 17 --- Principais fornecedores de matérias-primas para a
-indústria de tintas no Brasil
+\quadrotitle{17}{Principais fornecedores de matérias-primas para a indústria de tintas no Brasil}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1493,12 +1538,12 @@ nacional \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
-\section{8 TENDÊNCIAS ESTRATÉGICAS DO
+\section{TENDÊNCIAS ESTRATÉGICAS DO
 SETOR}\label{tenduxeancias-estratuxe9gicas-do-setor}
 
-\subsection{8.1 Transição para Sistemas Base
+\subsection{Transição para Sistemas Base
 Água}\label{transiuxe7uxe3o-para-sistemas-base-uxe1gua}
 
 A maior transformação estrutural em curso: sistemas de base aquosa já
@@ -1506,14 +1551,14 @@ dominam \textbf{mais de 50\% do mercado global} e crescem no Brasil por
 pressão regulatória (CONAMA, CETESB) e preferência do consumidor. Exige
 reformulação de resinas, aditivos e processos.
 
-\subsection{8.2 Tintas de Alto Teor de Sólidos (High
+\subsection{Tintas de Alto Teor de Sólidos (High
 Solids)}\label{tintas-de-alto-teor-de-suxf3lidos-high-solids}
 
 Redução de COV mantendo base solvente --- solução para aplicações
 industriais que não podem migrar para base água. Requer resinas de menor
 massa molecular e processos de aplicação a quente.
 
-\subsection{8.3 Nanotecnologia Aplicada}\label{nanotecnologia-aplicada}
+\subsection{Nanotecnologia Aplicada}\label{nanotecnologia-aplicada}
 
 \begin{itemize}
 \tightlist
@@ -1527,7 +1572,7 @@ massa molecular e processos de aplicação a quente.
   Nanotubos de carbono (condutividade)
 \end{itemize}
 
-\subsection{8.4 Matérias-Primas de Base
+\subsection{Matérias-Primas de Base
 Renovável}\label{matuxe9rias-primas-de-base-renovuxe1vel}
 
 \begin{itemize}
@@ -1543,7 +1588,7 @@ Renovável}\label{matuxe9rias-primas-de-base-renovuxe1vel}
   Óleos essenciais como biocidas
 \end{itemize}
 
-\subsection{8.5 Economia Circular}\label{economia-circular}
+\subsection{Economia Circular}\label{economia-circular}
 
 \begin{itemize}
 \tightlist
@@ -1556,7 +1601,7 @@ Renovável}\label{matuxe9rias-primas-de-base-renovuxe1vel}
   Formulações com menor geração de resíduos de produção
 \end{itemize}
 
-\subsection{8.6 Digitalização da
+\subsection{Digitalização da
 Produção}\label{digitalizauxe7uxe3o-da-produuxe7uxe3o}
 
 \begin{itemize}
@@ -1573,14 +1618,13 @@ Produção}\label{digitalizauxe7uxe3o-da-produuxe7uxe3o}
   Indústria 4.0 nas plantas: automação de pesagem, dispersão e envase
 \end{itemize}
 
-\section{9 CNAE E CLASSIFICAÇÃO
+\section{CNAE E CLASSIFICAÇÃO
 INDUSTRIAL}\label{cnae-e-classificauxe7uxe3o-industrial}
 
 Para fins de análise da \textbf{Indústria de Transformação} (conforme
 IBGE/PIA) (ver Quadro 18):
 
-Quadro 18 --- Códigos CNAE 2.0 relacionados à fabricação de tintas,
-pigmentos e produtos afins
+\quadrotitle{18}{Códigos CNAE 2.0 relacionados à fabricação de tintas, pigmentos e produtos afins}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1612,22 +1656,21 @@ tintas/solventes) \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 \textbf{CNAE principal do setor:} \textbf{20.21-5} --- Fabricação de
 tintas, vernizes, esmaltes e lacas
 
-\section{10 CONSIDERAÇÕES FINAIS: SÍNTESE E OPORTUNIDADES DE
+\section{CONSIDERAÇÕES FINAIS: SÍNTESE E OPORTUNIDADES DE
 NICHO}\label{considerauxe7uxf5es-finais-suxedntese-e-oportunidades-de-nicho}
 
-\subsection{10.1 Nichos de Alta Oportunidade no
+\subsection{Nichos de Alta Oportunidade no
 Brasil}\label{nichos-de-alta-oportunidade-no-brasil}
 
 O Quadro 19 consolida os nichos de maior oportunidade de mercado para a
 indústria de tintas no Brasil, com as respectivas justificativas:
 
-Quadro 19 --- Nichos de alta oportunidade para a indústria de tintas no
-Brasil e justificativas
+\quadrotitle{19}{Nichos de alta oportunidade para a indústria de tintas no Brasil e justificativas}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -1662,49 +1705,49 @@ digital; tintas antiestáticas e disipadoras \\
 \end{longtable}
 }
 
-Fonte: elaborado pelo autor.
+\quadrofonte{elaborado pelo autor.}
 
 \section{REFERÊNCIAS}\label{referuxeancias}
 
 ASSOCIAÇÃO BRASILEIRA DA INDÚSTRIA QUÍMICA. \textbf{ABIQUIM}: Associação
 Brasileira da Indústria Química. São Paulo, {[}2026{]}. Disponível em:
-https://www.abiquim.org.br. Acesso em: 9 mar. 2026.
+\url{https://www.abiquim.org.br}. Acesso em: 9 mar. 2026.
 
 ASSOCIAÇÃO BRASILEIRA DOS FABRICANTES DE TINTAS. \textbf{ABRAFATI}:
 anuário do setor de tintas 2025. São Paulo: ABRAFATI, 2025. Disponível
-em: https://www.abrafati.com.br. Acesso em: 9 mar. 2026.
+em: \url{https://www.abrafati.com.br}. Acesso em: 9 mar. 2026.
 
 BRITANNICA, The Editors of Encyclopaedia. \textbf{Paint}: chemical
 coating. In: BRITANNICA. Chicago: Encyclopædia Britannica, {[}2026{]}.
 Disponível em:
-https://www.britannica.com/technology/paint-chemical-coating. Acesso em:
+\url{https://www.britannica.com/technology/paint-chemical-coating}. Acesso em:
 9 mar. 2026.
 
 CHEMEUROPE. \textbf{Paint}. In: CHEMEUROPE ENCYCLOPEDIA. {[}S. l.{]}:
 ChemEurope, {[}2026{]}. Disponível em:
-https://www.chemeurope.com/en/encyclopedia/Paint.html. Acesso em: 9 mar.
+\url{https://www.chemeurope.com/en/encyclopedia/Paint.html}. Acesso em: 9 mar.
 2026.
 
 GRAND VIEW RESEARCH. \textbf{Paints and coatings market size, share \&
 trends analysis report by technology, by application, by region, and
 segment forecasts, 2024--2030}. {[}S. l.{]}: Grand View Research, 2024.
-Disponível em: https://www.grandviewresearch.com. Acesso em: 9 mar.
+Disponível em: \url{https://www.grandviewresearch.com}. Acesso em: 9 mar.
 2026.
 
 INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA. \textbf{Pesquisa
 Industrial Anual --- Empresa (PIA-Empresa)}: CNAE 20.21-5. Rio de
-Janeiro: IBGE, 2024. Disponível em: https://sidra.ibge.gov.br. Acesso
+Janeiro: IBGE, 2024. Disponível em: \url{https://sidra.ibge.gov.br}. Acesso
 em: 9 mar. 2026.
 
 INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA. \textbf{Classificação
 Nacional de Atividades Econômicas --- CNAE 2.0}. Rio de Janeiro: IBGE,
-{[}2024{]}. Disponível em: https://concla.ibge.gov.br. Acesso em: 9 mar.
+{[}2024{]}. Disponível em: \url{https://concla.ibge.gov.br}. Acesso em: 9 mar.
 2026.
 
 MORDOR INTELLIGENCE. \textbf{Paints and coatings market size \& share
 analysis --- growth trends \& forecasts (2026--2031)}. {[}S. l.{]}:
 Mordor Intelligence, 2026. Disponível em:
-https://www.mordorintelligence.com. Acesso em: 9 mar. 2026.
+\url{https://www.mordorintelligence.com}. Acesso em: 9 mar. 2026.
 
 % ── Elementos Pós-Textuais ───────────────────────────────────────────────────
 % REFERÊNCIAS, GLOSSÁRIO, APÊNDICES, ANEXOS
