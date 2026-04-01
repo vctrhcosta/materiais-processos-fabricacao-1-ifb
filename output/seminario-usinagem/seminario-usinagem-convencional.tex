@@ -1,0 +1,832 @@
+% ============================================================
+% Template LaTeX ABNT NBR 14724/2024 — IFB
+% Compatível com pdflatex + abntex2
+% Gerado via skill /abntex a partir de seminario-usinagem-convencional-humanizado.md
+% ============================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  brazil,
+  chapter=TITLE
+]{article}
+
+% ── Codificação e Idioma ──────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+% ── Fonte Times New Roman (ABNT permite Times New Roman ou Arial) ─────────────
+\usepackage{mathptmx}
+
+% ── Geometria da página — margens ABNT anverso ────────────────────────────────
+\usepackage[
+  a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm,
+  headheight=14pt,
+  headsep=0.5cm
+]{geometry}
+
+% ── Espaçamento 1,5 entre linhas (ABNT) ──────────────────────────────────────
+\usepackage{setspace}
+\onehalfspacing
+
+% ── Recuo do parágrafo: 1,25cm (ABNT) ────────────────────────────────────────
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% ── Formatação de seções — numeração progressiva NBR 6024 ────────────────────
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries\MakeUppercase}
+  {\thesection\quad}
+  {0em}{}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsection\quad}
+  {0em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}
+  {\thesubsubsection\quad}
+  {0em}{}
+
+\titleformat{\paragraph}[runin]
+  {\normalfont\normalsize\itshape}
+  {\theparagraph\quad}
+  {0em}{}[\hspace{0.5em}]
+
+\titleformat{\subparagraph}[runin]
+  {\normalfont\normalsize}
+  {\thesubparagraph\quad}
+  {0em}{}[\hspace{0.5em}]
+
+\titlespacing*{\section}      {0pt}{18pt}{12pt}
+\titlespacing*{\subsection}   {0pt}{18pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}    {0pt}{12pt}{0pt}
+
+% Seções primárias iniciam em nova página
+\newcommand{\secbreak}{\clearpage}
+\let\oldsection\section
+\renewcommand{\section}{\secbreak\oldsection}
+
+% ── Numeração de páginas — canto superior direito, 10pt ──────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ── Tabelas e Quadros ─────────────────────────────────────────────────────────
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.3}
+
+% ── Legendas (fonte 10, centralizada, parte superior) ─────────────────────────
+\usepackage{caption}
+\DeclareCaptionFormat{abnt}{\fontsize{10}{12}\selectfont#1#2#3}
+\DeclareCaptionLabelSeparator{emdash}{ --- }
+\captionsetup{
+  format=abnt,
+  justification=centering,
+  singlelinecheck=false,
+  labelsep=emdash,
+  position=above,
+  skip=3pt
+}
+
+\newcommand{\fonte}[1]{%
+  \begin{flushleft}
+    \fontsize{10}{12}\selectfont Fonte: #1
+  \end{flushleft}
+}
+
+% ── Listas ───────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+
+% ── Sumário e Lista de Quadros (ABNT) ────────────────────────────────────────
+\usepackage{tocloft}
+\renewcommand{\contentsname}{SUMÁRIO}
+\newlistof{quadros}{loq}{LISTA DE QUADROS}
+\setlength{\cftquadrosindent}{0pt}
+\setlength{\cftquadrosnumwidth}{0pt}
+\makeatletter
+\renewcommand{\listofquadros}{%
+  \section*{LISTA DE QUADROS}%
+  \@starttoc{loq}%
+}
+\makeatother
+
+\newcommand{\quadrotitle}[2]{%
+  \vspace{1em}%
+  \phantomsection\label{quadro#1}%
+  \addcontentsline{loq}{quadros}{Quadro #1 --- #2}%
+  \noindent\textbf{Quadro #1 --- #2}\par\vspace{0.3em}%
+}
+\newcommand{\quadrofonte}[1]{\par\noindent\textit{Fonte: #1}\vspace{1em}\par}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks, colorlinks=false, breaklinks=true]{hyperref}
+
+% ── Citações longas (>3 linhas): 10pt, simples, recuo 4cm ────────────────────
+\usepackage{quoting}
+\quotingsetup{font=small, indentfirst=false, vskip=\baselineskip}
+
+% ── Suporte a itálico/negrito em nomes científicos/estrangeiros ──────────────
+\usepackage[normalem]{ulem}
+
+% ── Figuras ──────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+
+% ── Referências ABNT — manual (sem bibtex) ───────────────────────────────────
+% abntex2cite omitido: referências escritas manualmente em formato NBR 6023
+\usepackage{url}
+
+% ── Macro \tightlist (compatibilidade pandoc / listas compactas) ─────────────
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\date{}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+% ─────────────────────────────────────────────────────────────────────────────
+
+% ══════════════════════════════════════════════════════════════════════════════
+% CAPA — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+
+    \includegraphics[width=0.4\textwidth]{../_dev/ifb_vs_dp.png}\\[1.8em]
+
+    {\normalsize\bfseries
+      Instituto Federal de Educação, Ciência e Tecnologia de Brasília --- IFB\\[0.3em]
+      \textit{Campus} Samambaia\\[0.3em]
+      Curso Superior de Tecnologia em Design de Produto
+    }
+
+    \vfill
+
+    {\large\bfseries
+      USINAGEM CONVENCIONAL NA INDÚSTRIA DE TINTAS E PIGMENTOS:
+      PROCESSOS, MATERIAIS E INTEGRAÇÃO PRODUTIVA
+    }
+
+    \vfill
+
+    {\normalsize Brasília/DF\\2026}
+
+  \end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% FOLHA DE ROSTO — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+
+    {\normalsize\bfseries VICTOR HUGO DA SILVA COSTA}
+
+    \vfill
+
+    {\large\bfseries
+      USINAGEM CONVENCIONAL NA INDÚSTRIA DE TINTAS E PIGMENTOS:
+      PROCESSOS, MATERIAIS E INTEGRAÇÃO PRODUTIVA
+    }
+
+    \vfill
+
+    \begin{flushright}
+      \begin{minipage}{0.5\textwidth}
+        \normalsize
+        Trabalho de Seminário apresentado ao Curso Superior de Tecnologia em
+        Design de Produto do Instituto Federal de Educação, Ciência e
+        Tecnologia de Brasília -- IFB -- \textit{Campus} Samambaia, como
+        requisito parcial para a aprovação na disciplina de Materiais e
+        Processos de Fabricação~I.
+
+        \vspace{1em}
+        Profª.\ Keila Sanches
+      \end{minipage}
+    \end{flushright}
+
+    \vfill
+
+    {\normalsize Brasília/DF -- 2026}
+
+  \end{center}
+\end{titlepage}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% RESUMO — NBR 6028/2003
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+  {\normalsize\bfseries RESUMO}
+\end{center}
+
+\vspace{1em}
+\noindent
+O presente trabalho analisa a presença dos processos de usinagem convencional
+na indústria de tintas e pigmentos, a partir da realidade industrial
+investigada na pesquisa anterior. A abordagem estrutura-se em duas linhas
+complementares: a análise da moagem de pigmentos como processo mecânico de
+cominuição e dispersão, distinto da usinagem convencional mas análogo aos
+processos abrasivos, e a identificação dos processos de usinagem empregados na
+fabricação dos equipamentos industriais que viabilizam essa etapa produtiva.
+São mapeados equipamentos como moinhos de pérolas, moinhos de três rolos,
+dispersores de alta velocidade e extrusoras, com identificação dos componentes
+usinados, dos processos aplicados e dos materiais metálicos e cerâmicos que os
+compõem. Conclui-se que a usinagem convencional, embora não atue diretamente
+sobre os insumos químicos da tinta, constitui elemento estrutural e
+indispensável à precisão, ao desempenho e à confiabilidade dos sistemas
+produtivos da cadeia de tintas.
+
+\vspace{1em}
+\noindent\textbf{Palavras-chave:} usinagem convencional; indústria de tintas;
+pigmentos; moagem; processos de fabricação.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% LISTA DE QUADROS
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\listofquadros
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SUMÁRIO
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+
+% ══════════════════════════════════════════════════════════════════════════════
+% CORPO DO TEXTO
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{Introdução}
+
+Antes de qualquer lata de tinta chegar a uma prateleira, há uma cadeia densa
+de transformações físicas, químicas e mecânicas que, na maior parte das vezes,
+passa completamente despercebida. A pesquisa que desenvolvemos anteriormente
+mapeou a estrutura da indústria de tintas e pigmentos no Brasil: insumos,
+principais fabricantes, etapas de processamento. O que esse levantamento
+deixou evidente foi que a moagem de pigmentos, etapa central do processo,
+depende de equipamentos de alta precisão para funcionar, e que essa precisão
+não surge espontaneamente: ela é fabricada, peça por peça, por processos
+convencionais de usinagem.
+
+Este trabalho parte justamente dessa constatação. O objetivo é entender onde e
+como esses processos estão presentes na produção de tintas, seja pela
+fabricação direta dos equipamentos, seja pela análise crítica da moagem como
+processo mecânico. Não é uma relação óbvia à primeira vista, e por isso vale o
+esforço de examinar com cuidado.
+
+Além de mapear os processos, o trabalho identifica as matérias-primas que os
+recebem: aços carbono, aços inoxidáveis, aços endurecidos e materiais
+cerâmicos, cada um selecionado por razões específicas de resistência, precisão
+e compatibilidade com o ambiente químico da produção.
+
+\section{Fundamentação Teórica}
+
+\subsection{Usinagem Convencional: Definição e Processos}
+
+Usinagem convencional é o conjunto de processos de fabricação que removem
+material de uma peça sólida com formação de cavaco, com o objetivo de obter
+geometria definida, controle dimensional e acabamento superficial especificado
+(MACHADO et al., 2015). Torneamento, fresamento, furação, retificação e
+rosqueamento são os processos mais representativos dessa família.
+
+O que todos têm em comum é a formação do cavaco: um fragmento de material
+resultante da deformação plástica intensa na zona de corte onde a energia da
+ferramenta se converte em calor e tensão cisalhante. Ernst e Merchant já
+descreviam esse mecanismo nos anos 1940 com base em modelos de plano de
+cisalhamento, e a mecânica fundamental não mudou muito desde então
+(ERNST; MERCHANT, 1941). O que evoluiu foi a capacidade de controlar e medir as
+variáveis envolvidas.
+
+Os processos, em síntese, funcionam assim:
+
+\begin{itemize}
+\tightlist
+\item \textbf{Torneamento}: ferramenta de ponta única remove material de peça
+  em rotação; produz superfícies de revolução como eixos, fusos e conexões
+  roscadas.
+\item \textbf{Fresamento}: ferramenta multicortante em rotação remove material
+  por corte intermitente; produz superfícies planas, ranhuras e perfis
+  complexos.
+\item \textbf{Furação}: broca rotativa avança axialmente, formando furos
+  cilíndricos.
+\item \textbf{Retificação}: rebolo abrasivo de grãos irregulares remove
+  microespessuras com alta precisão dimensional; alcança rugosidades de
+  Ra~0,1 a 1,6~$\mu$m.
+\item \textbf{Rosqueamento}: operação derivada do torneamento ou da furação,
+  produzindo roscas internas e externas para conexões de pressão.
+\end{itemize}
+
+\subsection{Cominuição e Dispersão de Pigmentos}
+
+Na indústria de tintas, a moagem de pigmentos enquadra-se nos processos de
+cominuição (redução do tamanho de partículas) e dispersão (distribuição
+homogênea no meio veicular). Os mecanismos físicos envolvidos incluem
+cisalhamento, predominante nos moinhos de alta rotação e de três rolos;
+impacto, presente nos moinhos de pérolas; e atrito, que contribui para a
+redução progressiva em escala submicromètrica.
+
+O objetivo é atingir granulometria controlada. Em tintas imobiliárias comuns,
+trabalha-se com partículas na faixa de 5 a 10~$\mu$m. Em pigmentos de alto
+desempenho como o TiO$_2$, a meta pode chegar a 0,3~$\mu$m, região onde o
+tamanho de partícula se aproxima do comprimento de onda da luz visível e a
+eficiência de espalhamento óptico é maximizada (KWADE, 1999; OHENOJA et al., 2013).
+
+O desempenho do processo costuma ser modelado por três variáveis
+interdependentes:
+
+\begin{itemize}
+\tightlist
+\item \textbf{Intensidade de tensão} (\textit{stress intensity}): energia
+  transferida por evento de contato entre esferas e partículas;
+\item \textbf{Número de tensões} (\textit{stress number}): quantidade de
+  eventos efetivos durante o tempo de residência no moinho;
+\item \textbf{Energia específica} (J/kg de produto): variável de controle e
+  escalonamento do processo.
+\end{itemize}
+
+Trata-se de um modelo essencialmente probabilístico: o critério de resultado
+não é uma dimensão única, mas uma curva de distribuição granulométrica com
+determinada mediana, largura e cauda --- variáveis que afetam diretamente
+como o pigmento se comporta na formulação final.
+
+\subsection{Usinagem Abrasiva como Ponte Conceitual}
+
+Há um ponto de convergência entre os dois mundos, e ele passa pelos processos
+abrasivos. Retificação e lixamento funcionam pela ação de múltiplos grãos
+irregulares que removem micropartículas de material, cada grão operando por
+uma combinação de corte, sulcamento e atrito (WERCHFENI et al., 2025). Quem já
+segurou uma peça recém-retificada e comparou com outra apenas torneada entende
+na prática o que os grãos fazem na superfície. Nesse sentido, as esferas de
+cerâmica de um moinho de pérolas operam de forma análoga aos grãos de um
+rebolo: múltiplos pontos de contato distribuídos, tensões localizadas e
+redução progressiva por fragmentação, ainda que em ordens de grandeza
+completamente distintas e com objetivos que não poderiam ser mais diferentes.
+
+\section{Moagem de Pigmentos como Processo de Cominuição}
+
+\subsection{Descrição do Processo}
+
+Num moinho de pérolas, as partículas de pigmento circulam em suspensão junto
+com esferas de meio de moagem, geralmente cerâmica de ZrO$_2$ ou
+Al$_2$O$_3$. O movimento do rotor cria gradientes de velocidade intensos no
+fluido, e as colisões sucessivas entre esferas e partículas produzem eventos
+de tensão que fraturam e redimensionam os aglomerados. O resultado final é uma
+curva de distribuição granulométrica, não uma dimensão geométrica.
+
+\subsection{Analogia com a Usinagem Abrasiva}
+
+As semelhanças com processos abrasivos convencionais ficam claras quando se
+comparam os elementos envolvidos:
+
+\quadrotitle{1}{Comparação entre moagem de pigmentos e retificação abrasiva}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.18\linewidth}
+  >{\raggedright\arraybackslash}p{0.38\linewidth}
+  >{\raggedright\arraybackslash}p{0.38\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Característica}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Moagem de Pigmentos}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Retificação (Abrasiva)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Elementos cortantes & Esferas (meio de moagem) & Grãos abrasivos (rebolo) \\
+Mecanismo dominante & Cisalhamento distribuído + impacto &
+  Corte + sulcamento + atrito \\
+Escala de atuação & 0,1--100~$\mu$m (partículas) &
+  $\mu$m--mm (superfície da peça) \\
+Resultado & Distribuição granulométrica (PSD) &
+  Geometria e rugosidade superficial \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\subsection{Por Que a Moagem Não É Usinagem}
+
+Apesar da analogia, o enquadramento correto da moagem como processo de
+cominuição e dispersão particulada se sustenta em razões bastante concretas.
+Não há peça sólida sendo trabalhada, não há objetivo geométrico a atingir e
+não se forma cavaco contínuo ou mensurável. O que existe é uma população
+estatística de partículas sendo redistribuída em tamanho. O critério de
+qualidade não é ``peça dentro da tolerância dimensional'', mas sim
+``distribuição granulométrica dentro da especificação''. São paradigmas
+distintos de transformação de material.
+
+\section{Usinagem Convencional na Fabricação dos Equipamentos}
+
+\subsection{Onde Está de Fato a Usinagem}
+
+Aqui está o ponto mais concreto do trabalho. Embora a tinta em si não seja
+usinada, cada equipamento que a processa depende de componentes fabricados com
+tolerâncias rigorosas. Um eixo de moinho de pérolas com \textit{runout}
+excessivo vibra, e vibração desregula o campo de tensão responsável pela
+fragmentação das partículas. Os cilindros de um moinho de três rolos precisam
+de acabamento superficial Ra~$\leq$~0,4~$\mu$m para garantir \textit{gap}
+uniforme ao longo de todo o comprimento. Um barril de extrusora mal honado
+resulta em variação de folga entre barril e rosca, o que altera o perfil de
+cisalhamento e compromete a homogeneidade da dispersão. Em todos esses casos,
+a origem do problema está na peça usinada, não na formulação química.
+
+\subsection{Mapeamento por Equipamento e Processo}
+
+\subsubsection{Moinho de Pérolas (\textit{Bead Mill})}
+
+\quadrotitle{2}{Componentes usinados no moinho de pérolas}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.17\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Componente}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Processo de Usinagem}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Material}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Requisito Crítico}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Eixo rotor/agitador &
+  Torneamento + retificação cilíndrica &
+  Aço inoxidável AISI 316 &
+  \textit{Runout} $\leq$ 0,01~mm; compatibilidade com vedação \\
+Discos/rotores agitadores &
+  Fresamento &
+  Aço inox / cerâmica &
+  Perfil geométrico para campo de cisalhamento \\
+Câmara de moagem (carcaça) &
+  Fresamento + furação &
+  Aço inox com revestimento cerâmico &
+  Acabamento interno; durabilidade ao desgaste \\
+Separadores e telas &
+  Furação de precisão / eletroerosão &
+  Aço inox / cerâmica &
+  Abertura controlada para retenção de esferas \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\textbf{Matérias-primas que recebem usinagem}: aço inoxidável AISI~316, aço
+carbono, materiais cerâmicos sinterizados (ZrO$_2$, Al$_2$O$_3$, SiC) para
+revestimentos e peças de contato direto com o produto.
+
+\subsubsection{Moinho de Três Rolos (\textit{Three-Roll Mill})}
+
+\quadrotitle{3}{Componentes usinados no moinho de três rolos}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.17\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Componente}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Processo de Usinagem}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Material}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Requisito Crítico}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Cilindros/rolos &
+  Retificação de precisão + superacabamento &
+  Aço endurecido / aço cromado / cerâmica &
+  Cilindricidade; Ra $\leq$ 0,4~$\mu$m; \textit{gap} uniforme \\
+Mancais e sedes &
+  Torneamento + retificação &
+  Aço carbono tratado &
+  Alinhamento; tolerâncias de ajuste ISO (H7/h6) \\
+Facas raspadoras &
+  Fresamento + retificação de perfil &
+  Aço-ferramenta &
+  Aresta afiada; planicidade \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\textbf{Matérias-primas}: aço endurecido (ex. 100Cr6), aço cromado duro,
+cerâmicas de ZrO$_2$ para aplicações de alta pureza.
+
+A cilindricidade e o acabamento superficial dos rolos determinam a
+uniformidade do campo de cisalhamento no \textit{nip} e, consequentemente, a
+quantidade de \textit{debris} metálico incorporado ao produto. Em formulações
+de pigmentos de alto desempenho, contaminação metálica acima de alguns ppm
+já é inaceitável.
+
+\subsubsection{Dispersor de Alta Velocidade (Cowles)}
+
+\quadrotitle{4}{Componentes usinados no dispersor de alta velocidade}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.17\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Componente}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Processo de Usinagem}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Material}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Requisito Crítico}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Eixo principal &
+  Torneamento + retificação &
+  Aço inoxidável &
+  \textit{Runout} mínimo; balanceamento dinâmico \\
+Disco dentado (\textit{impeller}) &
+  Fresamento / corte a laser + acabamento &
+  Aço inox ou aço carbono revestido &
+  Geometria dos dentes; resistência ao desgaste \\
+Interfaces com tanque &
+  Fresamento + furação + rosqueamento &
+  Aço estrutural &
+  Paralelismo; vedação \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\textbf{Matérias-primas}: aço AISI~316L, aço carbono com revestimento de
+dureza superficial.
+
+\subsubsection{Extrusora de Dupla Rosca (tintas em pó)}
+
+\quadrotitle{5}{Componentes usinados na extrusora de dupla rosca}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.17\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Componente}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Processo de Usinagem}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Material}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Requisito Crítico}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Roscas transportadoras &
+  Torneamento + fresamento de perfil + retificação &
+  Aço nitretado / aço-ferramenta &
+  Folga rosca--barril ($<$~0,1~mm); resistência ao desgaste \\
+Barril &
+  Furação profunda + honamento &
+  Aço com revestimento bimetálico &
+  Rugosidade interna Ra $<$ 0,8~$\mu$m; alinhamento \\
+Matrizes (\textit{die plates}) &
+  Fresamento + furação de precisão &
+  Aço endurecido &
+  Geometria dos orifícios de saída \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\textbf{Matérias-primas}: aço-ferramenta W.Nr.~1.2379, aço bimetálico com
+revestimento de carboneto de tungstênio para resistência ao desgaste abrasivo.
+
+\subsubsection{Reator de Síntese de Resinas (ex. alquídicas)}
+
+\quadrotitle{6}{Componentes usinados no reator de síntese de resinas}
+
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.17\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.26\linewidth}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Componente}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Processo de Usinagem}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Material}
+\end{minipage} &
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Requisito Crítico}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Eixo do agitador &
+  Torneamento + retificação &
+  Aço inoxidável AISI 304/316 &
+  Vedação mecânica; resistência química \\
+Impelidor &
+  Fresamento &
+  Aço inox &
+  Perfil hidrodinâmico \\
+Bocais e conexões &
+  Torneamento + rosqueamento &
+  Aço inox &
+  Estanqueidade; pressão de trabalho \\
+Faces de vedação &
+  Lapeamento / retificação de precisão &
+  Aço inox / cerâmica &
+  Ra $<$ 0,2~$\mu$m; planicidade \\
+\end{longtable}
+
+\quadrofonte{elaborado pelo autor.}
+
+\subsection{O Que Acontece Quando a Usinagem Falha}
+
+A relação entre precisão mecânica e qualidade do produto é mais direta do que
+parece. Eixos com \textit{runout} excessivo geram vibrações que consomem
+energia sem contribuir para a moagem. Folgas fora de tolerância em mancais e
+vedações levam a falhas prematuras e paradas não programadas. A superfície dos
+rolos com variação de rugosidade produz campo de cisalhamento heterogêneo, o
+que resulta em distribuição granulométrica mais larga do que a especificada.
+Desgaste acelerado de componentes introduz partículas metálicas na formulação,
+comprometendo a cor e a pureza da tinta. A rugosidade superficial, a geometria
+do rotor e a tolerância dos mancais interfere diretamente na curva
+granulométrica do produto final.
+
+Num setor onde opacidade e tonalidade são especificações comerciais rigorosas,
+essas variáveis mecânicas não são detalhes periféricos.
+
+\section{As Duas Escalas da Produção de Tintas}
+
+A produção de tintas opera em duas escalas que raramente são examinadas em
+conjunto, mas que se condicionam mutuamente de forma bastante concreta. Na
+escala macroscópica, a usinagem convencional fabrica componentes com
+tolerâncias de micrômetros e acabamentos superficiais de Ra~0,1 a
+3,2~$\mu$m. Na escala microscópica, a moagem fragmenta partículas na faixa de
+0,1 a 100~$\mu$m, e as condições dessa fragmentação dependem diretamente da
+geometria e do acabamento dos componentes usinados --- formando uma cadeia de
+dependência que atravessa ordens de grandeza.
+
+Para tornar isso mais concreto: a rugosidade superficial de um cilindro de
+moinho, medida em décimos de micrômetro, afeta a forma como o fluido escoa no
+\textit{nip} e, por consequência, a intensidade do cisalhamento sobre as
+partículas em suspensão. A precisão mecânica alcançada na usinagem determina,
+em última instância, a granulometria e a estabilidade da dispersão. A
+fronteira entre engenharia de fabricação e química de processos, nesse
+contexto, não é tão nítida quanto os dois campos costumam sugerir: a indústria
+de tintas é um caso em que processos físico-químicos de transformação e
+processos mecânicos de fabricação não existem em paralelo, mas em dependência
+estrutural um do outro.
+
+\section{Conclusão}
+
+A análise deixou evidente que a moagem de pigmentos, pelos critérios que
+definem a usinagem convencional, não se enquadra nessa categoria: não há peça
+sólida sendo trabalhada, não há objetivo geométrico e não se forma cavaco
+mensurável. O que existe é uma população de partículas sendo redistribuída em
+tamanho por eventos estatísticos de tensão. A analogia com processos
+abrasivos, especialmente com a retificação, é válida em termos de mecânica de
+contato, mas os objetivos, as métricas e os critérios de qualidade pertencem a
+paradigmas completamente distintos.
+
+Essa distinção, entretanto, não reduz em nada o papel da usinagem convencional
+no setor. Torneamento, fresamento, furação, retificação e rosqueamento são
+responsáveis por fabricar cada componente crítico dos moinhos, dispersores,
+extrusoras e reatores que processam a tinta. Os materiais submetidos a esses
+processos --- aços inoxidáveis, aços endurecidos, cerâmicas técnicas --- são
+selecionados não apenas pela resistência mecânica, mas pela capacidade de
+manter geometria precisa e superfície limpa ao longo do tempo de operação em
+ambientes quimicamente agressivos.
+
+Num sentido bem concreto, a qualidade dimensional de um eixo torneado e
+retificado se traduz, semanas depois, na opacidade e no brilho de uma parede
+pintada. Essa cadeia de causalidade, que vai do micrômetro ao milímetro e do
+milímetro ao metro quadrado de superfície revestida, é o que este trabalho
+buscou demonstrar.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% REFERÊNCIAS — NBR 6023/2018
+% ══════════════════════════════════════════════════════════════════════════════
+
+\section{Referências}\label{referencias}
+
+\noindent
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. \textbf{NBR 14724}:
+informação e documentação --- trabalhos acadêmicos --- apresentação.
+Rio de Janeiro: ABNT, 2024.
+
+\vspace{0.5em}
+\noindent
+ASTM INTERNATIONAL. \textbf{ASTM D1210}: standard test method for
+fineness of dispersion of pigment-vehicle systems by Hegman-type gage.
+West Conshohocken: ASTM International, 2022.
+
+\vspace{0.5em}
+\noindent
+ERNST, H.; MERCHANT, M. E. Chip formation, friction and high quality
+machined surfaces. \textbf{Surface Treatment of Metals}. American
+Society for Metals, v.~29, p.~299--378, 1941.
+
+\vspace{0.5em}
+\noindent
+INTERNATIONAL ORGANIZATION FOR STANDARDIZATION. \textbf{ISO 13320}:
+particle size analysis --- laser diffraction methods. Geneva: ISO, 2020.
+
+\vspace{0.5em}
+\noindent
+KWADE, A. Wet comminution in stirred media mills: research and its
+practical application. \textbf{Powder Technology}, v.~105, n.~1--3,
+p.~14--20, 1999.
+
+\vspace{0.5em}
+\noindent
+MACHADO, Á. R. et al. \textbf{Teoria da Usinagem dos Materiais}. 3.~ed.
+São Paulo: Blucher, 2015.
+
+\vspace{0.5em}
+\noindent
+OHENOJA, K. et al. Effect of operational parameters and stress energies
+on the particle size and width of particle size distribution of pigment
+TiO$_2$ in stirred media milling. \textbf{Advanced Powder Technology},
+v.~24, p.~886--892, 2013.
+
+\vspace{0.5em}
+\noindent
+WERCHFENI, A. et al. Micro-scale abrasive material removal via cutting,
+ploughing, and rubbing mechanisms. \textbf{Wear}, v.~562--563, 2025.
+
+\end{document}
