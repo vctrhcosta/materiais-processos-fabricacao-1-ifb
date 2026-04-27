@@ -1,0 +1,590 @@
+% ============================================================
+% Template LaTeX ABNT NBR 14724/2024 — IFB
+% Compatível com pdflatex/xelatex + abntex2 (opcional)
+% ============================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  brazil,
+  chapter=TITLE
+]{article}
+
+% ── Codificação e Idioma ──────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+% ── Fonte Times New Roman (ABNT permite Times New Roman ou Arial) ─────────────
+\usepackage{mathptmx}
+
+% ── Geometria da página — margens ABNT anverso ────────────────────────────────
+\usepackage[
+  a4paper,
+  left=3cm,
+  top=3cm,
+  right=2cm,
+  bottom=2cm,
+  headheight=14pt,
+  headsep=0.5cm
+]{geometry}
+
+% ── Espaçamento 1,5 entre linhas (ABNT) ──────────────────────────────────────
+\usepackage{setspace}
+\onehalfspacing
+
+% ── Recuo do parágrafo: 1,25cm (ABNT) ────────────────────────────────────────
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% ── Formatação de seções — numeração progressiva NBR 6024 ────────────────────
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries\MakeUppercase}
+  {\thesection\quad}
+  {0em}{}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsection\quad}
+  {0em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}
+  {\thesubsubsection\quad}
+  {0em}{}
+
+\titleformat{\paragraph}[runin]
+  {\normalfont\normalsize\itshape}
+  {\theparagraph\quad}
+  {0em}{}[\hspace{0.5em}]
+
+\titleformat{\subparagraph}[runin]
+  {\normalfont\normalsize}
+  {\thesubparagraph\quad}
+  {0em}{}[\hspace{0.5em}]
+
+\titlespacing*{\section}      {0pt}{18pt}{12pt}
+\titlespacing*{\subsection}   {0pt}{18pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}    {0pt}{12pt}{0pt}
+
+\newcommand{\secbreak}{\clearpage}
+\let\oldsection\section
+\renewcommand{\section}{\secbreak\oldsection}
+
+% ── Numeração de páginas — canto superior direito, 10pt ──────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% ── Tabelas e Quadros ─────────────────────────────────────────────────────────
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.3}
+
+% ── Legendas ──────────────────────────────────────────────────────────────────
+\usepackage{caption}
+\DeclareCaptionFormat{abnt}{\fontsize{10}{12}\selectfont#1#2#3}
+\captionsetup{
+  format=abnt,
+  justification=centering,
+  singlelinecheck=false,
+  labelsep=emdash,
+  position=above,
+  skip=3pt
+}
+
+\newcommand{\fonte}[1]{%
+  \begin{flushleft}
+    \fontsize{10}{12}\selectfont Fonte: #1
+  \end{flushleft}
+}
+
+% ── Listas ───────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+
+% ── Sumário e Lista de Quadros (ABNT) ────────────────────────────────────────
+\usepackage{tocloft}
+\renewcommand{\contentsname}{SUMÁRIO}
+\newlistof{quadros}{loq}{LISTA DE QUADROS}
+\setlength{\cftquadrosindent}{0pt}
+\setlength{\cftquadrosnumwidth}{0pt}
+\makeatletter
+\renewcommand{\listofquadros}{%
+  \section*{LISTA DE QUADROS}%
+  \@starttoc{loq}%
+}
+\makeatother
+
+\newcommand{\quadrotitle}[2]{%
+  \vspace{1em}%
+  \phantomsection\label{quadro#1}%
+  \addcontentsline{loq}{quadros}{Quadro #1 --- #2}%
+  \noindent\textbf{Quadro #1 --- #2}\par\vspace{0.3em}%
+}
+\newcommand{\quadrofonte}[1]{\par\noindent\textit{Fonte: #1}\vspace{1em}\par}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks, colorlinks=false, breaklinks=true]{hyperref}
+
+% ── Citações longas ──────────────────────────────────────────────────────────
+\usepackage{quoting}
+\quotingsetup{font=small, indentfirst=false, vskip=\baselineskip}
+
+% ── Suporte a itálico/negrito ────────────────────────────────────────────────
+\usepackage[normalem]{ulem}
+
+% ── Figuras ──────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+
+% ── Referências ABNT ─────────────────────────────────────────────────────────
+\usepackage[
+  alf,
+  abnt-emphasize=bf,
+  abnt-etal-cite=2,
+  abnt-etal-list=0
+]{abntex2cite}
+
+\date{}
+
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{document}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% CAPA — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+
+    \includegraphics[width=0.4\textwidth]{ifb_vs_dp.png}\\[1.8em]
+
+    {\normalsize\bfseries
+      INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE BRASÍLIA\\[0.3em]
+      \textit{Campus} Samambaia\\[0.3em]
+      Curso Superior de Tecnologia em Design de Produto
+    }
+
+    \vfill
+
+    {\large\bfseries
+      USINAGEM NÃO CONVENCIONAL NA INDÚSTRIA DE TINTAS E PIGMENTOS: MÉTODOS, APLICAÇÕES DIRETAS E INTEGRAÇÃO PRODUTIVA
+    }
+
+    \vfill
+
+    {\normalsize Brasília/DF\\2026}
+
+  \end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% FOLHA DE ROSTO — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+
+    {\normalsize\bfseries VICTOR COSTA}
+
+    \vfill
+
+    {\large\bfseries
+      USINAGEM NÃO CONVENCIONAL NA INDÚSTRIA DE TINTAS E PIGMENTOS: MÉTODOS, APLICAÇÕES DIRETAS E INTEGRAÇÃO PRODUTIVA
+    }
+
+    \vfill
+
+    \begin{flushright}
+      \begin{minipage}{0.5\textwidth}
+        \normalsize
+        Trabalho de Seminário apresentado ao Curso Superior de Tecnologia em Design de Produto do Instituto Federal de Educação, Ciência e Tecnologia de Brasília -- \textit{Campus} Samambaia, como requisito parcial para a aprovação na disciplina de Materiais e Processos de Fabricação I.
+
+        \vspace{1em}
+        Profª. Keila Sanches
+      \end{minipage}
+    \end{flushright}
+
+    \vfill
+
+    {\normalsize Brasília/DF -- 2026}
+
+  \end{center}
+\end{titlepage}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% RESUMO — NBR 6028/2003
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+  {\normalsize\bfseries RESUMO}
+\end{center}
+
+\vspace{1em}
+\noindent
+O presente trabalho investiga a presença dos processos de usinagem não convencional na indústria de tintas e pigmentos, dando continuidade à análise iniciada no seminário anterior sobre usinagem convencional. A abordagem identifica dois eixos de inserção desses métodos na cadeia produtiva: (i) aplicações diretas na produção, como a síntese de nanopigmentos por ablação laser pulsada em líquido (PLAL), a modificação de superfícies de pigmentos por plasma e a remoção de tinta por laser; e (ii) aplicações na preparação de substratos e no controle de qualidade, incluindo tratamento a plasma e texturização laser para adesão de revestimentos, furação laser de bicos de impressão digital e ensaios ultrassônicos de películas. Conclui-se que, ao contrário da usinagem convencional, restrita à fabricação de equipamentos, os métodos não convencionais atuam diretamente sobre os materiais e processos da cadeia de tintas, representando uma fronteira tecnológica de crescente relevância industrial.
+
+\vspace{1em}
+\noindent\textbf{Palavras-chave:} usinagem não convencional; indústria de tintas; pigmentos; ablação laser; EDM; plasma; processos de fabricação.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% LISTA DE QUADROS
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\listofquadros
+
+% ══════════════════════════════════════════════════════════════════════════════
+% SUMÁRIO — NBR 14724/2024
+% ══════════════════════════════════════════════════════════════════════════════
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 1 INTRODUÇÃO
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Introdução}\label{introducao}
+
+No seminário anterior, ficou claro que a usinagem convencional (torneamento, fresamento, furação, retificação, rosqueamento) tem papel estrutural na indústria de tintas e pigmentos: ela viabiliza a fabricação dos equipamentos que sustentam a cadeia produtiva, dos moinhos de pérolas aos reatores. Ficou claro também que esses processos de remoção de material com formação de cavaco não atuam sobre os insumos da tinta, mas sobre os componentes metálicos e cerâmicos das máquinas.
+
+Este trabalho avança a investigação para os \textbf{processos de usinagem não convencional}, ou seja, métodos de remoção ou transformação de material que prescindem do contato mecânico entre ferramenta de corte e peça. Esses processos surgiram para superar limites da usinagem convencional diante de materiais extremamente duros, geometrias complexas, dimensões microscópicas e requisitos de acabamento inalcançáveis por meios mecânicos tradicionais (BENEDICT, 2017).
+
+A hipótese é que os métodos não convencionais ocupam um espaço qualitativamente distinto na cadeia de tintas: eles não se limitam à fabricação de equipamentos como os convencionais, mas atuam diretamente na síntese de pigmentos, no tratamento de superfícies, na aplicação e remoção de revestimentos e no controle de qualidade. Para verificar essa hipótese, o trabalho percorre dois eixos:
+
+\begin{itemize}
+\tightlist
+\item \textbf{(i)} Identificação de aplicações diretas na cadeia produtiva de tintas e pigmentos;
+\item \textbf{(ii)} Mapeamento de aplicações na preparação de substratos e no controle de qualidade de revestimentos.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 2 FUNDAMENTAÇÃO TEÓRICA
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Fundamentação Teórica}\label{fundamentacao-teorica}
+
+\subsection{Definição e Justificativa}\label{definicao-e-justificativa}
+
+Usinagem não convencional, também chamada de usinagem não tradicional ou processos avançados de fabricação, designa o conjunto de métodos de remoção de material que utilizam energia mecânica não cortante, energia eletroquímica, energia térmica ou energia química como mecanismo primário. Não há contato direto entre ferramenta de corte e peça, nem formação de cavaco no sentido clássico (BENEDICT, 2017; YOUSSEF; EL-HOFY, 2020).
+
+Esses processos existem porque a usinagem convencional encontra limites concretos:
+
+\begin{itemize}
+\tightlist
+\item Materiais com dureza superior a 45 HRC (carbonetos de tungstênio, cerâmicas técnicas);
+\item Geometrias internas complexas, canais e microestruturados;
+\item Dimensões na escala micrométrica (furos de 20--150 $\mu$m, fendas de 0,1 mm);
+\item Peças delgadas ou frágeis que não suportam forças de corte;
+\item Acabamentos superficiais e integridade metalúrgica incompatíveis com processos térmico-mecânicos convencionais.
+\end{itemize}
+
+\subsection{Classificação por Fonte de Energia}\label{classificacao-por-fonte-de-energia}
+
+A classificação padrão organiza os processos conforme a forma de energia predominante na remoção de material:
+
+\quadrotitle{1}{Classificação dos processos de usinagem não convencional}
+
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.18}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.22}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.08}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.52}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Categoria
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Processo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sigla
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Princípio de Remoção
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Mecânica} & Usinagem Ultrassônica & USM & Vibração de alta frequência (18--40 kHz) transmitida a abrasivo em suspensão; remoção por microimpacto \\
+ & Jato Abrasivo & AJM & Partículas abrasivas aceleradas por gás comprimido (2--8 bar) a 150--300 m/s \\
+ & Jato de Água Abrasivo & AWJM & Água a 210--690 MPa ($\sim$Mach 3) com abrasivo de granada; corte a frio \\
+\textbf{Eletroquímica} & Usinagem Eletroquímica & ECM & Dissolução anódica controlada em eletrólito pressurizado; gap de 80--800 $\mu$m \\
+ & Retificação Eletroquímica & ECG & 90\% dissolução eletroquímica + 10\% abrasão mecânica \\
+\textbf{Térmica / Elétrica} & Eletroerosão (por penetração e a fio) & EDM & Descargas elétricas de alta frequência (8\,000--12\,000 °C) em dielétrico \\
+ & Usinagem a Laser & LBM & Feixe coerente focalizado; fusão e vaporização do material \\
+ & Usinagem por Feixe de Elétrons & EBM & Elétrons acelerados a 150--200 kV em vácuo \\
+ & Corte a Plasma & PAM & Jato de gás ionizado a 20\,000--30\,000 °C \\
+\textbf{Química} & Usinagem Química & CHM & Dissolução controlada por reagentes (ácidos, sais); áreas protegidas por máscara \\
+ & Usinagem Fotoquímica & PCM & Fotolitografia + ataque químico; resolução de detalhes em lâminas finas \\
+\end{longtable}
+}
+
+\quadrofonte{elaborado pelo autor.}
+
+\subsection{Comparativo de Capacidades}\label{comparativo-de-capacidades}
+
+O Quadro 2 resume precisão, materiais típicos e limitações de cada método, o que ajuda a entender por que determinados processos aparecem em certas etapas da cadeia de tintas e não em outras.
+
+\quadrotitle{2}{Capacidades comparativas dos principais processos}
+
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.18}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.18}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.25}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.27}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Processo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Precisão típica
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rugosidade (Ra)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Materiais típicos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Limitação principal
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+USM & $\pm$5--25 $\mu$m & 1,5--2,5 $\mu$m & Cerâmicas, vidro, WC & Taxa de remoção muito baixa \\
+AWJM & $\pm$130 $\mu$m & Variável & Qualquer material & Custo operacional (abrasivo) \\
+ECM & 80--800 $\mu$m (gap) & Espelhada & Condutores (Ni, Ti, aços) & Somente condutores; eletrólito corrosivo \\
+EDM & $\pm$1 $\mu$m (fio) & Controlável & Condutores, qualquer dureza & Somente condutores; baixa taxa \\
+LBM & $\pm$10 $\mu$m & Rz 3--6 $\mu$m & Metais, polímeros, cerâmicas & Espessura limitada; custo de capital \\
+PAM & Inferior ao laser & --- & Condutores (chapas grossas) & Zona afetada pelo calor \\
+PCM & $\sim$ espessura da lâmina & Sem rebarbas & Lâminas finas (0,01--1,5 mm) & Só materiais finos; resíduos químicos \\
+\end{longtable}
+}
+
+\quadrofonte{elaborado pelo autor com base em Benedict (2017) e Youssef e El-Hofy (2020).}
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 3 APLICAÇÕES DIRETAS NA CADEIA DE TINTAS E PIGMENTOS
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Aplicações Diretas na Cadeia de Tintas e Pigmentos}\label{aplicacoes-diretas}
+
+\subsection{Síntese de Nanopigmentos por Ablação Laser Pulsada em Líquido (PLAL)}\label{plal}
+
+A ablação laser pulsada em líquido (\textit{Pulsed Laser Ablation in Liquid}, PLAL) é provavelmente o exemplo mais surpreendente de como um método de usinagem pode cruzar a fronteira entre fabricação mecânica e síntese química. Na PLAL, um alvo sólido imerso em líquido é irradiado por pulsos de laser focalizado. A energia do feixe vaporiza a superfície do alvo e gera um plasma confinado pelo líquido; ao se expandir e resfriar, esse plasma condensa em nanopartículas coloidais estáveis (DELL'AGLIO et al., 2015; ZHANG; CHAKER; MA, 2017).
+
+A técnica já foi aplicada diretamente à produção de pigmentos para tintas:
+
+\begin{itemize}
+\tightlist
+\item \textbf{TiO\textsubscript{2} (pigmento branco)}: Fachin et al. (2023) sintetizaram nanopartículas de TiO\textsubscript{2} por PLAL em água, numa rota ambientalmente limpa para pigmentos e fotocatalisadores. Zuniga-Ibarra et al. (2019), com laser Nd:YAG (532 nm, 10 ns, 10 Hz), obtiveram TiO\textsubscript{2} negro a partir de pó branco imerso em água, demonstrando controle de cor via parâmetros do laser.
+
+\item \textbf{ZnO (pigmento branco / absorvedor UV)}: Foudi et al. (2023) sintetizaram nanopartículas de ZnO por PLAL e as incorporaram em tintas antibacterianas, confirmando funcionalidade pigmentar e biocida ao mesmo tempo.
+
+\item \textbf{Nanopartículas multifuncionais}: Salih, Haider e Nazari (2021) sintetizaram prata e óxido de níquel por PLAL com laser Nd:YAG e incorporaram esses materiais em formulações de tinta alquídica. Lau, Waag e Barcikowski (2017) foram além e geraram nanopartículas de ouro diretamente dentro de uma matriz de esmalte de unha, sem etapa intermediária de dispersão.
+\end{itemize}
+
+Do ponto de vista industrial, a PLAL tem vantagens claras: não usa surfactantes nem precursores tóxicos, produz partículas de alta pureza e permite controle de tamanho por parâmetros do laser (comprimento de onda, fluência, duração do pulso). A limitação é igualmente clara: a escala. A produção industrial em larga escala ainda não compete com métodos convencionais de precipitação e calcinação, mas como rota para nanopigmentos funcionais e especialidades a técnica avança rapidamente (ZHANG; CHAKER; MA, 2017).
+
+\subsection{Tratamento a Plasma de Superfícies de Pigmentos}\label{plasma-pigmentos}
+
+O tratamento a plasma modifica a química superficial de partículas de pigmento e pode melhorar sua dispersibilidade em veículos aquosos ou orgânicos. O problema é conhecido de qualquer formulador: pigmentos hidrofóbicos como negro de fumo e pigmentos orgânicos resistem à molhabilidade por veículos de base aquosa, obrigando o uso de agentes dispersantes. O plasma contorna isso introduzindo grupos polares (C--O, C=O, O--H) na superfície das partículas, o que eleva a energia superficial e facilita a dispersão sem aditivos químicos (NIE et al., 2025).
+
+Pransilp et al. (2016) mostraram que o plasma de O\textsubscript{2} melhorou a intensidade de cor de tintas pigmentadas para impressão inkjet sobre tecidos. Pykönen (2010) documentou efeitos semelhantes em revestimentos pigmentados sobre papel, com alteração da molhabilidade de vernizes UV.
+
+O tratamento a plasma de pigmentos encontra-se predominantemente em estágio de pesquisa. Alguns fabricantes de pigmentos especiais investigam plasma atmosférico como processo contínuo para modificação superficial em linha, mas a adoção industrial consolidada ainda não se concretizou.
+
+\subsection{Remoção de Tinta por Laser}\label{remocao-laser}
+
+Remoção de tinta por laser (\textit{laser paint stripping}) é, de longe, a aplicação mais consolidada dos métodos não convencionais na cadeia de tintas. Um feixe de laser pulsado incide sobre a camada de tinta e provoca decomposição térmica, quebra fotoquímica das ligações poliméricas e espalação por expansão térmica rápida (LI, X. et al., 2021).
+
+A manutenção aeronáutica, naval e automotiva utiliza o processo extensamente:
+
+\begin{itemize}
+\tightlist
+\item Zhu, S. et al. (2025) usaram laser de femtossegundos para remoção seletiva de camadas de tinta sobre CFRP (plástico reforçado com fibra de carbono), com limiar de ablação inferior a 0,25 J/cm², sem dano ao substrato compósito.
+\item Li, W. et al. (2023) identificaram três mecanismos de remoção em pele de aeronave: decomposição térmica, evaporação e espalação.
+\item Zhu, G. et al. (2020) confirmaram que peles de alumínio de aeronaves Boeing mantêm integridade estrutural e resistência à corrosão após limpeza a laser.
+\end{itemize}
+
+\quadrotitle{3}{Comparativo entre remoção química e remoção a laser de tinta}
+
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.40}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.40}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Aspecto
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remoção química
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remoção a laser
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Resíduos & Solventes perigosos (MEK, diclorometano) & Mínimos (resíduo sólido de ablação) \\
+Dano ao substrato & Ataque químico possível & Sem dano (com parâmetros adequados) \\
+Seletividade & Difícil controlar camada a camada & Remoção camada a camada viável \\
+Velocidade & Horas (tempo de imersão) & Minutos \\
+Automação & Difícil & Alta (CNC/robótica) \\
+Custo & Baixo custo de consumíveis, alto custo ambiental & Alto investimento, baixo custo operacional \\
+\end{longtable}
+}
+
+\quadrofonte{elaborado pelo autor.}
+
+Para a indústria de tintas, a remoção a laser interessa em duas frentes: como tecnologia de manutenção nos setores que mais consomem tinta (aeroespacial, naval, automotivo) e como ferramenta de teste de adesão e durabilidade em laboratórios de P\&D.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 4 PREPARAÇÃO DE SUBSTRATOS E CONTROLE DE QUALIDADE
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Preparação de Substratos e Controle de Qualidade}\label{preparacao-substratos}
+
+\subsection{Tratamento a Plasma para Adesão de Pintura}\label{plasma-adesao}
+
+O tratamento a plasma atmosférico e a baixa pressão modifica a química e a topografia de superfícies, melhorando a adesão de tintas e revestimentos de forma mensurável. O mecanismo envolve quatro ações simultâneas: limpeza de contaminantes orgânicos, ativação pela criação de grupos polares, microrrugosidade nanométrica para ancoragem mecânica e aumento de molhabilidade.
+
+Os números são expressivos: a energia superficial do polipropileno sobe de aproximadamente 30 mN/m (não tratado) para mais de 50 mN/m após plasma, viabilizando a molhabilidade pela tinta (MARTINEZ; ABENOJAR; LOPEZ DE ARMENTIA, 2018). Peng e Zhang (2020) demonstraram adesão excelente de primer à base de água e topcoat sobre polipropileno tratado. Patel e Bhowmik (2017) revisaram condições ótimas de plasma para adesão de pintura sobre alumínio conforme norma militar MIL-P-23377.
+
+Na indústria automotiva, o caso mais significativo é o documentado pela Plasmatreat GmbH (2020): a substituição integral da fosfatização química por plasma atmosférico em linhas de pintura, eliminando efluentes de fosfato e reduzindo custos operacionais.
+
+\subsection{Texturização a Laser para Adesão de Revestimentos}\label{texturizacao-laser}
+
+A texturização a laser cria topografias controladas na escala micro e nanométrica: crateras, sulcos, reticulados. Essas estruturas aumentam a área de contato e geram pontos de ancoragem mecânica para revestimentos. Feng et al. (2019) testaram padrões de dimples, grooves e grids sobre aço 30CrMnSiA e obtiveram aumento de 2 a 5 vezes na resistência ao arrancamento. Guarnaccio et al. (2021) aplicaram laser de femtossegundos sobre polipropileno copolímero para pintura automotiva, com melhoria significativa de adesão.
+
+Kromer et al. (2017) confirmaram ganhos em revestimentos depositados por aspersão térmica, e Fan et al. (2023) documentaram resultados semelhantes em revestimentos cerâmicos sobre alumínio.
+
+\subsection{Furação Laser de Bicos para Impressão Digital}\label{furacao-laser-inkjet}
+
+A impressão digital com tintas pigmentadas, que abrange cerâmica decorativa, impressão têxtil e impressão funcional, é um segmento em expansão na indústria de tintas. Os bicos de impressão inkjet possuem orifícios de 20 a 150 $\mu$m, fabricados quase exclusivamente por furação a laser excimer (248 nm KrF, 308 nm XeCl) ou laser de picossegundos (GOWER, 2000; LIZOTTE et al., 2002; WU, L. et al., 2015).
+
+Um dado que chama atenção: a furação a laser é hoje o método dominante na fabricação global de placas de bicos inkjet, processando aço inoxidável, poliimida e silício com resolução que métodos mecânicos convencionais simplesmente não alcançam.
+
+\subsection{Ensaios Ultrassônicos de Revestimentos}\label{ensaios-ultrasonicos}
+
+A usinagem ultrassônica (USM) não atua diretamente sobre tintas, mas a tecnologia ultrassônica encontra emprego extensivo no controle de qualidade de películas aplicadas. Zhang, X. et al. (2014) usaram reflectometria ultrassônica para medir espessura de tinta sobre aço. Zhang, J. et al. (2021) desenvolveram metodologia de imersão para avaliação de espessura com resolução a partir de 30 $\mu$m. Alig et al. (2007) monitoraram formação de filme, cura e envelhecimento de revestimentos orgânicos em tempo real.
+
+As capacidades vão da medição não destrutiva de espessura à detecção de defeitos como delaminação e vazios, passando pela análise de sistemas multicamadas e monitoramento de cura em tempo real. A versatilidade dessas medições, junto com o custo relativamente baixo dos equipamentos, explica a adoção ampla na indústria.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 5 SÍNTESE E DISCUSSÃO
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Síntese e Discussão}\label{sintese-discussao}
+
+\subsection{Dois Eixos de Inserção}\label{dois-eixos}
+
+Os processos de usinagem não convencional se conectam à indústria de tintas e pigmentos em dois eixos, e ambos se distinguem radicalmente do papel mapeado para a usinagem convencional.
+
+No primeiro eixo, o de atuação direta na produção, a PLAL sintetiza nanopigmentos (TiO\textsubscript{2}, ZnO, Ag/NiO) diretamente no meio veicular, o plasma modifica superfícies de pigmentos e o laser remove tinta de substratos. São processos de produção e manutenção, não de fabricação de equipamentos.
+
+No segundo, o de preparação e controle, plasma e laser preparam substratos para pintura, a furação laser fabrica bicos de impressão digital e os ensaios ultrassônicos verificam películas aplicadas. São processos que atuam na cadeia de uso da tinta, antes, durante ou depois da aplicação.
+
+\subsection{Comparativo com a Usinagem Convencional}\label{comparativo}
+
+O contraste fica evidente quando se coloca lado a lado: a usinagem convencional fabrica o que fabrica a tinta (os equipamentos); a não convencional participa da produção e da cadeia de uso da tinta em si. Enquanto a convencional é condição necessária mas invisível ao produto final, métodos como PLAL e plasma participam da composição ou da qualidade direta do revestimento.
+
+Essa distinção é o achado central deste trabalho.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% 6 CONCLUSÃO
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Conclusão}\label{conclusao}
+
+Os processos de usinagem não convencional ocupam, na indústria de tintas e pigmentos, um espaço qualitativamente diferente daquele mapeado para a usinagem convencional. Enquanto torneamento e fresamento fabricam os componentes mecânicos dos equipamentos industriais, métodos como ablação laser, plasma e ultrassom atuam diretamente sobre os materiais e processos da cadeia produtiva.
+
+A PLAL ilustra bem essa diferença. O princípio é o mesmo da usinagem a laser, isto é, remoção de material por energia fotônica. Mas na PLAL o resultado não é uma peça com geometria definida, e sim nanopartículas coloidais que funcionam como pigmento e podem ser integradas ao veículo da tinta sem etapa intermediária de dispersão.
+
+O tratamento a plasma ilustra outra dimensão dessa presença. Da superfície do pigmento (para melhorar dispersibilidade) à superfície do substrato (para garantir adesão), o plasma percorre a cadeia inteira. A remoção de tinta por laser, consolidada na manutenção aeronáutica e naval, acrescenta a extremidade final: o revestimento já aplicado. Furação laser de bicos inkjet e ensaios ultrassônicos de películas completam um panorama que vai da matéria-prima ao produto acabado.
+
+A análise reforça que a indústria de tintas não é exclusivamente química. Processos de fabricação e processos químicos se cruzam de forma concreta nessa cadeia, e a convergência com tecnologias de usinagem não convencional se dá não nos bastidores da fabricação de máquinas, mas na composição, na aplicação e na verificação da tinta.
+
+% ══════════════════════════════════════════════════════════════════════════════
+% REFERÊNCIAS
+% ══════════════════════════════════════════════════════════════════════════════
+\section{Referências}\label{referencias}
+
+ALIG, I. et al. Monitoring of film formation, curing and ageing of coatings by an ultrasonic reflection method. \textbf{Progress in Organic Coatings}, v. 58, n. 2--3, p. 200--208, 2007.
+
+BENEDICT, G. F. \textbf{Nontraditional Manufacturing Processes}. Boca Raton: Taylor \& Francis, 2017.
+
+DELL'AGLIO, M. et al. Mechanisms and processes of pulsed laser ablation in liquids during nanoparticle production. \textbf{Applied Surface Science}, v. 348, p. 4--9, 2015.
+
+FACHIN, L. B. et al. Green synthesis of blue titania nanoparticles by pulsed laser ablation in water. \textbf{Open Ceramics}, v. 16, 2023.
+
+FAN, C. et al. Adhesion strength and anti-corrosion performance of ceramic coating on laser-textured aluminum alloy. \textbf{Coatings}, v. 13, n. 5, 2023.
+
+FENG, Z. et al. Effect of laser texturing on surface characteristics and bonding property of 30CrMnSiA steel. \textbf{Journal of Manufacturing Processes}, v. 47, p. 130--142, 2019.
+
+FOUDI, H. et al. Synthesis and characterization of ZnO nanoparticles for antibacterial paints. \textbf{Chemical Papers}, v. 77, p. 4149--4159, 2023.
+
+GOWER, M. C. Industrial applications of laser micromachining. \textbf{Optics Express}, v. 7, n. 2, p. 56--67, 2000.
+
+GUARNACCIO, A. et al. Femtosecond laser surface texturing of polypropylene copolymer for automotive paint applications. \textbf{Surface and Coatings Technology}, v. 406, 2021.
+
+KROMER, R. et al. Coating deposition and adhesion enhancements by laser surface texturing. \textbf{Materials and Manufacturing Processes}, v. 32, n. 14, p. 1642--1652, 2017.
+
+LAU, M.; WAAG, F.; BARCIKOWSKI, S. Direct integration of laser-generated nanoparticles into transparent nail polish: the plasmonic `Goldfinger'. \textbf{Industrial \& Engineering Chemistry Research}, v. 56, n. 12, p. 3291--3296, 2017.
+
+LI, W. et al. Removal mechanisms and microstructure characteristics of laser paint stripping on aircraft skin surface. \textbf{Photonics}, v. 10, n. 1, 2023.
+
+LI, X. et al. Laser paint stripping strategy in engineering application: a systematic review. \textbf{Optik}, v. 241, 2021.
+
+LIZOTTE, T. et al. Excimer lasers drill inkjet nozzles. \textbf{Laser Focus World}, v. 38, n. 12, 2002.
+
+MARTINEZ, M. A.; ABENOJAR, J.; LOPEZ DE ARMENTIA, S. Plasma activation enhanced surface energy. \textbf{Coatings}, v. 8, n. 5, 2018.
+
+NIE, H. et al. Progress on pigment dispersion issues. \textbf{Pigment \& Resin Technology}, v. 54, n. 1, 2025.
+
+PATEL, V. K.; BHOWMIK, S. Aluminum alloy plasma processing. \textbf{Reviews of Adhesion and Adhesives}, v. 5, n. 3, p. 301--319, 2017.
+
+PENG, X.; ZHANG, Z. Polypropylene surface painting via plasma treatment. \textbf{Journal of Adhesion Science and Technology}, v. 34, n. 5, 2020.
+
+PLASMATREAT GmbH. Industrial atmospheric plasma replacing phosphating in automotive paint lines. \textbf{IST International Surface Technology}, 2020.
+
+PRANSILP, P. et al. Surface modification of cotton fabrics by gas plasmas. \textbf{Applied Surface Science}, v. 364, p. 208--220, 2016.
+
+PYKÖNEN, M. \textbf{Influence of plasma modification on surface properties}. Turku: Åbo Akademi University, 2010. Tese de doutorado.
+
+SALIH, A. A.; HAIDER, A. J.; NAZARI, A. Preparation and characterizations of nanomaterial by pulsed laser ablation in liquid (PLAIL) as friendly environment paint. \textbf{Journal of Physics: Conference Series}, v. 1795, 2021.
+
+WU, L. et al. Fabrication of nozzle plates with micro-orifices by laser drilling. \textbf{Small}, v. 11, n. 18, p. 2085--2091, 2015.
+
+YOUSSEF, H.; EL-HOFY, H. \textbf{Non-traditional and Advanced Machining Technologies}. Boca Raton: CRC Press, 2020.
+
+ZHANG, J.; CHAKER, M.; MA, D. Pulsed laser ablation based synthesis of colloidal metal nanoparticles for catalytic applications. \textbf{Journal of Colloid and Interface Science}, v. 489, p. 138--149, 2017.
+
+ZHANG, J. et al. Non-destructive evaluation of coating thickness using water immersion ultrasonic testing. \textbf{Coatings}, v. 11, n. 12, 2021.
+
+ZHANG, X. et al. Non-destructive testing of paint coatings on steel plates by ultrasonic reflectometry. \textbf{Journal of Nondestructive Evaluation}, v. 33, n. 4, p. 485--494, 2014.
+
+ZHU, G. et al. Corrosion and wear performance of aircraft skin after laser cleaning. \textbf{Optics \& Laser Technology}, v. 132, 2020.
+
+ZHU, S. et al. Precision paint stripping of multi-layer aerospace coatings on CFRP using femtosecond lasers. \textbf{Composites Part B: Engineering}, v. 290, 2025.
+
+ZUNIGA-IBARRA, V. A. et al. Synthesis and characterization of black TiO\textsubscript{2} nanoparticles by pulsed laser irradiation in liquid. \textbf{Applied Surface Science}, v. 483, p. 156--164, 2019.
+
+ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS. NBR 14724: \textbf{Informação e documentação --- Trabalhos acadêmicos --- Apresentação}. Rio de Janeiro: ABNT, 2024.
+
+\end{document}

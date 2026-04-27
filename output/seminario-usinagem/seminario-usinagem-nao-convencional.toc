@@ -1,0 +1,20 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {section}{\numberline {1}Introdução}{4}{section.1}%
+\contentsline {section}{\numberline {2}Fundamentação Teórica}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Definição e Justificativa}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Classificação por Fonte de Energia}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Comparativo de Capacidades}{6}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Aplicações Diretas na Cadeia de Tintas e Pigmentos}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Síntese de Nanopigmentos por Ablação Laser Pulsada em Líquido (PLAL)}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tratamento a Plasma de Superfícies de Pigmentos}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Remoção de Tinta por Laser}{9}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Preparação de Substratos e Controle de Qualidade}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Tratamento a Plasma para Adesão de Pintura}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Texturização a Laser para Adesão de Revestimentos}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Furação Laser de Bicos para Impressão Digital}{11}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Ensaios Ultrassônicos de Revestimentos}{12}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Síntese e Discussão}{13}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Dois Eixos de Inserção}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Comparativo com a Usinagem Convencional}{13}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusão}{14}{section.6}%
+\contentsline {section}{\numberline {7}Referências}{15}{section.7}%
