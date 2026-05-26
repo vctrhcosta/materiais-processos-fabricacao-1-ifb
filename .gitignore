@@ -1,0 +1,8 @@
+.DS_Store
+*.aux
+*.log
+*.lof
+*.loq
+*.out
+*.toc
+missfont.log
