@@ -53,7 +53,7 @@ Nos Galpões 4, 5 e 6, o sistema de corte a plasma Oxipira Série Master process
 
 As prensas dobradeiras hidráulicas constituem o processo central de conformação do aço na Gravia. O Galpão 1 conta com dez unidades distribuídas entre três modelos: quatro Newton PSH-35030 (comprimento útil de ~3 m), seis Newton PSH-7030 (~6 m) e uma hidráulica sincronizada Newton PSH-25030. Os Galpões 4 a 6 abrigam a Newton PSH-55060, com capacidade para peças de até 6 m.
 
-O processo consiste no posicionamento da chapa entre punção e matriz, seguido da aplicação de força hidráulica para produzir a deflexão angular desejada. Parâmetros críticos incluem o raio mínimo de dobra (função da espessura e do limite de resistência do material), o retorno elástico após remoção da carga (springback) que deve ser compensado na programação, e os comprimentos mínimos de flange determinados pelas dimensões do ferramental disponível. Na visita, o que mais chamou atenção nesse setor foi o ruído contínuo das prensas Newton em operação e o volume de peças semi-acabadas empilhadas ao longo do galpão, algo que nenhuma ficha técnica consegue transmitir.
+O processo consiste no posicionamento da chapa entre punção e matriz, seguido da aplicação de força hidráulica para produzir a deflexão angular desejada. Parâmetros críticos incluem o raio mínimo de dobra (função da espessura e do limite de resistência do material), o retorno elástico após remoção da carga (springback) que deve ser compensado na programação, e os comprimentos mínimos de flange determinados pelas dimensões do ferramental disponível. Na visita, o que mais chamou atenção nesse setor foi o ruído contínuo das prensas em operação e o volume de peças semi-acabadas empilhadas ao longo do galpão.
 
 ### 3.5 Perfilação Contínua (Galpão 3)
 
@@ -79,9 +79,9 @@ Fonte: acervo do autor (2026).
 
 Os produtos resultantes (trilhos e montantes para drywall, perfis metálicos, tubos de 2") têm seção transversal constante ao longo de todo o comprimento, característica inerente ao processo de perfilação por rolos.
 
-Figura 5 — Perfis galvanizados para drywall, produto final da perfilação
+Figura 5 — Perfis galvanizados, produto final da perfilação
 
-![Perfis galvanizados para drywall, produto final da perfilação](imagens/perfis-drywall-cortados-empilhados.jpeg)
+![Perfis galvanizados, produto final da perfilação](imagens/perfis-drywall-cortados-empilhados.jpeg)
 
 Fonte: acervo do autor (2026).
 
