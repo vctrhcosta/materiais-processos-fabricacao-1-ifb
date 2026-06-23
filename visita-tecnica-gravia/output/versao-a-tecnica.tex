@@ -1,0 +1,305 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[12pt,a4paper,oneside,brazil,chapter=TITLE]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{times}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage[a4paper,left=3cm,top=3cm,right=2cm,bottom=2cm,headheight=14pt,headsep=0.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\normalsize\bfseries\MakeUppercase}{\thesection\quad}{0em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection\quad}{0em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{\thesubsubsection\quad}{0em}{}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+\titlespacing*{\subsection}{0pt}{18pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\newcommand{\secbreak}{\clearpage}
+\let\oldsection\section
+\renewcommand{\section}{\secbreak\oldsection}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}\renewcommand{\headrulewidth}{0pt}}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.3}
+\usepackage{caption}
+\DeclareCaptionFormat{abnt}{\fontsize{10}{12}\selectfont#1#2#3}
+\DeclareCaptionLabelSeparator{emdashsep}{ --- }
+\captionsetup{format=abnt,justification=centering,singlelinecheck=false,labelsep=emdashsep,position=above,skip=3pt}
+\newcommand{\fonte}[1]{\begin{flushleft}\fontsize{10}{12}\selectfont Fonte: #1\end{flushleft}}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{tocloft}
+\renewcommand{\contentsname}{SUMÁRIO}
+\newlistof{quadros}{loq}{LISTA DE QUADROS}
+\setlength{\cftquadrosindent}{0pt}
+\setlength{\cftquadrosnumwidth}{0pt}
+\makeatletter
+\renewcommand{\listofquadros}{\section*{LISTA DE QUADROS}\@starttoc{loq}}
+\makeatother
+\newcommand{\quadrotitle}[2]{\vspace{1em}\phantomsection\label{quadro#1}\addcontentsline{loq}{quadros}{Quadro #1 --- #2}\noindent\textbf{Quadro #1 --- #2}\par\vspace{0.3em}}
+\newcommand{\quadrofonte}[1]{\par\noindent\textit{Fonte: #1}\vspace{1em}\par}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks,colorlinks=false,breaklinks=true]{hyperref}
+\usepackage{quoting}
+\quotingsetup{font=small,indentfirst=false,vskip=\baselineskip}
+\usepackage{graphicx}
+\usepackage{float}
+\date{}
+
+% ============================================================
+% DOCUMENTO
+% ============================================================
+\begin{document}
+
+% ----------------------------------------------------------
+% CAPA
+% ----------------------------------------------------------
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+    {\normalsize\bfseries
+      Instituto Federal de Educação, Ciência e Tecnologia de Brasília --- IFB\\[0.3em]
+      \textit{Campus} Samambaia\\[0.3em]
+      Curso Superior de Tecnologia em Design de Produto
+    }
+    \vfill
+    {\large\bfseries RELATÓRIO DE VISITA TÉCNICA --- GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO}
+    \vfill
+    {\normalsize Brasília/DF\\2026}
+  \end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+% ----------------------------------------------------------
+% FOLHA DE ROSTO
+% ----------------------------------------------------------
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+    {\normalsize\bfseries VICTOR HUGO DA SILVA COSTA}
+    \vfill
+    {\large\bfseries RELATÓRIO DE VISITA TÉCNICA --- GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO}
+    \vfill
+    \begin{flushright}
+      \begin{minipage}{0.5\textwidth}
+        \normalsize
+        Relatório de visita técnica apresentado ao Curso Superior de Tecnologia em Design de Produto do Instituto Federal de Educação, Ciência e Tecnologia de Brasília --- IFB, \textit{Campus} Samambaia, como requisito parcial para a aprovação na disciplina de Materiais e Processos de Fabricação I.
+        \vspace{1em}
+
+        Professora: Prof.ª Keila Sanches
+      \end{minipage}
+    \end{flushright}
+    \vfill
+    {\normalsize Brasília/DF --- 2026}
+  \end{center}
+\end{titlepage}
+
+% ----------------------------------------------------------
+% RESUMO
+% ----------------------------------------------------------
+\clearpage
+\thispagestyle{plain}
+\begin{center}
+  {\normalsize\bfseries RESUMO}
+\end{center}
+\vspace{12pt}
+
+\noindent Este relatório descreve a visita técnica realizada em 02 de junho de 2026 à unidade industrial da Gravia Indústria de Perfilados de Aço, em Taguatinga, Distrito Federal. O objetivo foi observar os processos de beneficiamento do aço executados pela empresa, compreender a organização dos setores produtivos e identificar os principais equipamentos empregados na fabricação de componentes para a construção civil e aplicações industriais. A planta é dividida em galpões especializados: o Galpão 1 concentra operações de corte e conformação de chapas; o Galpão 3 é dedicado à perfilação contínua para sistemas de drywall; e os Galpões 4, 5 e 6 atendem ao processamento de chapas espessas. Os equipamentos registrados incluem prensas dobradeiras hidráulicas, corte a laser, guilhotina hidráulica, corte a plasma, perfiladeiras e pontes rolantes. A gestão da produção adota Lean Six Sigma e Gestão por Processos e Trabalho Padronizado (GPTW).
+
+\vspace{12pt}
+\noindent\textbf{Palavras-chave:} Beneficiamento do aço; Processos de fabricação; Corte a laser; Conformação por dobra; Perfilação.
+
+% ----------------------------------------------------------
+% LISTA DE QUADROS
+% ----------------------------------------------------------
+\clearpage
+\listofquadros
+
+% ----------------------------------------------------------
+% SUMÁRIO
+% ----------------------------------------------------------
+\clearpage
+\tableofcontents
+
+% ============================================================
+% CORPO DO TEXTO
+% ============================================================
+
+% ----------------------------------------------------------
+% SEÇÃO 1 — INTRODUÇÃO
+% ----------------------------------------------------------
+\section{Introdução}
+
+A visita técnica à unidade industrial da Gravia Indústria de Perfilados de Aço foi realizada em 02 de junho de 2026, com o propósito de observar os processos de beneficiamento do aço em operação, compreender a organização funcional da planta e registrar os equipamentos empregados nas diferentes etapas de fabricação. Com mais de seis décadas de atuação no mercado e unidade instalada em Taguatinga, Distrito Federal, a empresa se especializou na transformação do aço para os setores da construção civil, da indústria e do agronegócio.
+
+% ----------------------------------------------------------
+% SEÇÃO 2 — ORGANIZAÇÃO DA PLANTA E SISTEMA DE GESTÃO
+% ----------------------------------------------------------
+\section{Organização da Planta e Sistema de Gestão}
+
+A planta é dividida em galpões com funções bem delimitadas, o que permite controle mais fino do fluxo de materiais e especialização das equipes por setor. Essa compartimentação ficou evidente já na entrada da fábrica, onde placas indicativas e codificação visual delimitavam com clareza as áreas de circulação e os postos de trabalho.
+
+Na gestão da produção, a empresa combina o Lean Six Sigma, cujo foco é eliminar desperdícios e reduzir a variabilidade dos processos por meios estatísticos, com a Gestão por Processos e Trabalho Padronizado (GPTW), que documenta rotinas operacionais para cada etapa produtiva. O resultado prático dessas metodologias era visível no chão de fábrica: materiais identificados, etapas registradas e espaços organizados sem excesso.
+
+A empresa mantém também o Setor de Tubos (SIA), unidade voltada à fabricação e ao processamento de tubos metálicos para clientes internos e externos.
+
+% ----------------------------------------------------------
+% SEÇÃO 3 — GALPÃO 1
+% ----------------------------------------------------------
+\section{Galpão 1 --- Corte e Conformação de Chapas}
+
+O Galpão 1 é o principal centro de transformação de chapas metálicas da fábrica, com a maior concentração e diversidade de equipamentos observados na visita. Foi o que ficou mais na memória do percurso: o ruído contínuo das prensas dobradeiras Newton em operação, a cadência das chapas sendo alimentadas pelas desbobinadeiras e o volume de peças semi-acabadas empilhadas ao longo do galpão.
+
+\subsection{Fluxo Produtivo}
+
+O fluxo produtivo do Galpão 1 segue a seguinte sequência operacional:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item Recebimento das bobinas de aço;
+\item Desbobinamento e alimentação das linhas de produção;
+\item Corte das bobinas em chapas padronizadas de 3 m e 6 m;
+\item Processos de conformação e fabricação das peças finais.
+\end{enumerate}
+
+\subsection{Equipamentos}
+
+\quadrotitle{1}{Equipamentos do Galpão 1 --- corte e conformação de chapas}
+{\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.24\linewidth}
+  >{\raggedright\arraybackslash}p{0.20\linewidth}
+  >{\raggedright\arraybackslash}p{0.44\linewidth}
+  >{\centering\arraybackslash}p{0.06\linewidth}@{}}
+\toprule
+\textbf{Equipamento} & \textbf{Modelo} & \textbf{Características} & \textbf{Qtd.} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Equipamento} & \textbf{Modelo} & \textbf{Características} & \textbf{Qtd.} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Prensa dobradeira hidráulica & Newton PSH-35030 & Comprimento útil aprox. 3 m & 4 \\
+Prensa dobradeira hidráulica & Newton PSH-7030 & Comprimento útil aprox. 6 m & 6 \\
+Corte a laser & Newton LN 3015F & Alta precisão dimensional; programação por software; aplicação em geometrias complexas & 1 \\
+Prensa hidráulica sincronizada & Newton PSH-25030 & Controle de precisão em operações de dobra específicas & 1 \\
+Guilhotina hidráulica & Newton GHN 301911 (3019) & Aplicação em chapas de maiores espessuras & 1 \\
+Ponte rolante & HTB 1787 & Movimentação de chapas e componentes de grande porte & 1 \\
+Desbobinadeira & --- & Alimentação das linhas; conversão de bobinas em chapas & 1 \\
+Torno mecânico & --- & Fabricação e manutenção de peças e dispositivos internos & 1 \\
+\end{longtable}}
+\quadrofonte{elaborado pelo autor com base em observação \textit{in loco} (2026).}
+
+O equipamento de maior interesse técnico do setor é o corte a laser Newton LN 3015F. Por ser programado via software específico, permite a execução de geometrias complexas com alta repetibilidade dimensional, algo inviável por guilhotina ou plasma nos mesmos parâmetros. A presença de um torno mecânico no galpão também chama atenção: indica que a empresa fabrica e mantém seus próprios dispositivos internos, o que aponta para um grau relevante de verticalização da manutenção.
+
+% ----------------------------------------------------------
+% SEÇÃO 4 — GALPÃO 3
+% ----------------------------------------------------------
+\section{Galpão 3 --- Perfilação e Produtos para Drywall}
+
+O Galpão 3 é dedicado à fabricação de perfis metálicos para sistemas construtivos em drywall, com produção em série a partir de bobinas de aço processadas em regime contínuo.
+
+\subsection{Produtos Fabricados}
+
+Os produtos deste setor incluem:
+
+\begin{itemize}
+\tightlist
+\item Trilhos para drywall;
+\item Montantes metálicos;
+\item Perfis metálicos diversos;
+\item Tubos de aproximadamente 2'' de diâmetro.
+\end{itemize}
+
+\subsection{Equipamentos}
+
+\quadrotitle{2}{Equipamentos do Galpão 3 --- perfilação e produtos para drywall}
+{\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.30\linewidth}
+  >{\raggedright\arraybackslash}p{0.64\linewidth}@{}}
+\toprule
+\textbf{Equipamento} & \textbf{Características} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Equipamento} & \textbf{Características} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Tesoura rotativa & Processamento contínuo de bobinas metálicas \\
+Perfiladeira & Velocidade aprox. 32 m/min; largura máx. 1.200 mm; espessuras entre 0,9 mm e 5 mm \\
+\end{longtable}}
+\quadrofonte{elaborado pelo autor com base em observação \textit{in loco} (2026).}
+
+A perfiladeira opera em regime contínuo. A velocidade de processamento de cerca de 32 m/min, combinada com a faixa de espessuras entre 0,9 mm e 5 mm, confere ao equipamento boa versatilidade dentro dos limites da linha. Do ponto de vista de design de produto, é interessante observar que a padronização dimensional obtida por esse processo é condição necessária para a compatibilidade dos sistemas construtivos em drywall, onde a intercambialidade entre perfis de diferentes fornecedores depende de tolerâncias apertadas.
+
+% ----------------------------------------------------------
+% SEÇÃO 5 — GALPÕES 4, 5 E 6
+% ----------------------------------------------------------
+\section{Galpões 4, 5 e 6 --- Processamento de Chapas Espessas}
+
+Esses galpões concentram a fabricação de componentes estruturais para construção civil e aplicações industriais, com chapas de espessuras superiores às trabalhadas no Galpão 1.
+
+\subsection{Equipamentos}
+
+\quadrotitle{3}{Equipamentos dos Galpões 4, 5 e 6 --- processamento de chapas espessas}
+{\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.24\linewidth}
+  >{\raggedright\arraybackslash}p{0.48\linewidth}@{}}
+\toprule
+\textbf{Equipamento} & \textbf{Modelo} & \textbf{Características} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Equipamento} & \textbf{Modelo} & \textbf{Características} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Corte a plasma & Oxipira Série Master & Capacidade de corte: 0,5 mm a 50 mm; aplicação em componentes estruturais; maior produtividade para chapas espessas; menor precisão dimensional que o laser \\
+Prensa dobradeira hidráulica & Newton PSH-55060 & Comprimento útil até 6 m; aplicação em componentes estruturais de grandes dimensões \\
+\end{longtable}}
+\quadrofonte{elaborado pelo autor com base em observação \textit{in loco} (2026).}
+
+A escolha pelo corte a plasma neste setor, em detrimento do laser utilizado no Galpão 1, reflete uma decisão de processo coerente: para chapas espessas, o plasma entrega produtividade maior a um custo operacional inferior, aceitando-se a perda de tolerância dimensional que, para componentes estruturais, normalmente não é fator crítico. Aí fica claro como a seleção do processo de fabricação não é questão de preferência tecnológica, mas de adequação entre as características do material, a geometria do produto e as exigências dimensionais da aplicação.
+
+% ----------------------------------------------------------
+% SEÇÃO 6 — CONSIDERAÇÕES FINAIS
+% ----------------------------------------------------------
+\section{Considerações Finais}
+
+A visita à Gravia permitiu observar, em operação real, o fluxo de beneficiamento do aço desde o recebimento das bobinas até componentes acabados prontos para expedição. A experiência evidenciou algo que a teoria por si só não transmite bem: a lógica de por que cada processo está onde está dentro da planta.
+
+A coexistência de corte a laser e corte a plasma no mesmo ambiente produtivo, por exemplo, ilustra de forma concreta os trade-offs entre precisão e produtividade que permeiam as decisões de engenharia de processo. Isso, junto com o volume de prensas dobradeiras de diferentes portes, mostra que a planta foi configurada menos em torno de uma tecnologia única e mais em função da diversidade de produtos que a empresa precisa atender.
+
+A organização por galpões especializados, combinada com as metodologias Lean Six Sigma e GPTW em operação visível, compõe um modelo produtivo que parece ter amadurecido ao longo das décadas de atuação da empresa, e não apenas adotado formalmente.
+
+% ----------------------------------------------------------
+% REFERÊNCIAS
+% ----------------------------------------------------------
+\section{REFERÊNCIAS}\label{referencias}
+
+\noindent GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO. \textbf{Visita técnica à unidade industrial de Taguatinga/DF.} [Observação direta]. Taguatinga, DF, 02 jun. 2026.
+
+\end{document}

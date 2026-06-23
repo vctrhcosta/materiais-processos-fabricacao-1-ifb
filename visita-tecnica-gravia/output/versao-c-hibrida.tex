@@ -1,0 +1,234 @@
+\documentclass[12pt,a4paper,oneside,brazil,chapter=TITLE]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{times}
+\renewcommand{\ttdefault}{cmtt}
+\usepackage[a4paper,left=3cm,top=3cm,right=2cm,bottom=2cm,headheight=14pt,headsep=0.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\normalsize\bfseries\MakeUppercase}{\thesection\quad}{0em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection\quad}{0em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{\thesubsubsection\quad}{0em}{}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+\titlespacing*{\subsection}{0pt}{18pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\newcommand{\secbreak}{\clearpage}
+\let\oldsection\section
+\renewcommand{\section}{\secbreak\oldsection}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[R]{\fontsize{10}{12}\selectfont\thepage}\renewcommand{\headrulewidth}{0pt}}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.3}
+\usepackage{caption}
+\DeclareCaptionFormat{abnt}{\fontsize{10}{12}\selectfont#1#2#3}
+\DeclareCaptionLabelSeparator{emdashsep}{ --- }
+\captionsetup{format=abnt,justification=centering,singlelinecheck=false,labelsep=emdashsep,position=above,skip=3pt}
+\newcommand{\fonte}[1]{\begin{flushleft}\fontsize{10}{12}\selectfont Fonte: #1\end{flushleft}}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{tocloft}
+\renewcommand{\contentsname}{SUMÁRIO}
+\newlistof{quadros}{loq}{LISTA DE QUADROS}
+\setlength{\cftquadrosindent}{0pt}
+\setlength{\cftquadrosnumwidth}{0pt}
+\makeatletter
+\renewcommand{\listofquadros}{\section*{LISTA DE QUADROS}\@starttoc{loq}}
+\makeatother
+\newcommand{\quadrotitle}[2]{\vspace{1em}\phantomsection\label{quadro#1}\addcontentsline{loq}{quadros}{Quadro #1 --- #2}\noindent\textbf{Quadro #1 --- #2}\par\vspace{0.3em}}
+\newcommand{\quadrofonte}[1]{\par\noindent\textit{Fonte: #1}\vspace{1em}\par}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage[hidelinks,colorlinks=false,breaklinks=true]{hyperref}
+\usepackage{quoting}
+\quotingsetup{font=small,indentfirst=false,vskip=\baselineskip}
+\usepackage{graphicx}
+\usepackage{float}
+\date{}
+
+% -----------------------------------------------------------------------
+\begin{document}
+
+% CAPA
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+    {\normalsize\bfseries
+      Instituto Federal de Educação, Ciência e Tecnologia de Brasília (IFB)\\[0.3em]
+      \textit{Campus} Samambaia\\[0.3em]
+      Curso Superior de Tecnologia em Design de Produto
+    }
+    \vfill
+    {\large\bfseries PROCESSOS DE BENEFICIAMENTO DO AÇO E IMPLICAÇÕES PARA O DESIGN DE PRODUTO: RELATÓRIO DE VISITA TÉCNICA À GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO}
+    \vfill
+    {\normalsize Brasília/DF\\2026}
+  \end{center}
+\end{titlepage}
+\setcounter{page}{2}
+
+% FOLHA DE ROSTO
+\begin{titlepage}
+  \thispagestyle{empty}
+  \begin{center}
+    {\normalsize\bfseries VICTOR HUGO DA SILVA COSTA}
+    \vfill
+    {\large\bfseries PROCESSOS DE BENEFICIAMENTO DO AÇO E IMPLICAÇÕES PARA O DESIGN DE PRODUTO: RELATÓRIO DE VISITA TÉCNICA À GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO}
+    \vfill
+    \begin{flushright}
+      \begin{minipage}{0.5\textwidth}
+        \normalsize
+        Relatório de visita técnica apresentado ao Curso Superior de Tecnologia em Design de Produto do Instituto Federal de Educação, Ciência e Tecnologia de Brasília (IFB), \textit{Campus} Samambaia, como requisito parcial para a aprovação na disciplina de Materiais e Processos de Fabricação I.
+        \vspace{1em}
+
+        Professora: Prof.ª Keila Sanches
+      \end{minipage}
+    \end{flushright}
+    \vfill
+    {\normalsize Brasília/DF, 2026}
+  \end{center}
+\end{titlepage}
+
+% RESUMO
+\section*{RESUMO}
+\thispagestyle{plain}
+
+Este relatório registra a visita técnica realizada em 02 de junho de 2026 à Gravia Indústria de Perfilados de Aço, em Taguatinga, Distrito Federal, descrevendo os processos e equipamentos observados e analisando suas implicações para o design de produto. A planta industrial é organizada em galpões especializados: o Galpão 1 concentra operações de corte e conformação de chapas; o Galpão 3 é dedicado à perfilação contínua para drywall; e os Galpões 4, 5 e 6 atendem ao processamento de chapas espessas. Os principais processos identificados, corte a laser, corte a plasma, conformação por dobra em prensas hidráulicas e perfilação contínua, são descritos com base na observação direta e analisados em termos de suas capacidades, limites e relevância para decisões projetuais. O relatório conclui que a compreensão dos processos de fabricação disponíveis é condição para que o designer especifique materiais e formas com realismo técnico e eficiência produtiva.
+
+\vspace{1em}
+\noindent\textbf{Palavras-chave:} Beneficiamento do aço; Processos de fabricação; Design de produto; Corte a laser; Conformação por dobra.
+
+% LISTA DE QUADROS
+\clearpage
+\listofquadros
+\thispagestyle{plain}
+
+% SUMÁRIO
+\clearpage
+\tableofcontents
+\thispagestyle{plain}
+
+% -----------------------------------------------------------------------
+% CORPO DO TEXTO
+% -----------------------------------------------------------------------
+
+\section{INTRODUÇÃO}
+
+A visita técnica à unidade industrial da Gravia Indústria de Perfilados de Aço, realizada em 02 de junho de 2026, teve como objetivo observar os processos de beneficiamento do aço executados pela empresa, compreender a organização da planta produtiva e identificar os equipamentos empregados em cada etapa de fabricação. A Gravia opera há mais de seis décadas na transformação e beneficiamento do aço para os setores da construção civil, indústria e agronegócio, com unidade instalada em Taguatinga, Distrito Federal.
+
+Este relatório articula o que cada processo permite e onde estão seus limites práticos, orientando a leitura para o design de produto. Cada seção de descrição técnica carrega uma análise voltada ao projeto, porque foi essa a pergunta que esteve presente durante toda a visita: o que o designer ganha em saber como isso funciona?
+
+\section{A EMPRESA E A ORGANIZAÇÃO DA PRODUÇÃO}
+
+A planta da Gravia é dividida em galpões com funções especializadas, o que permite maior controle do fluxo produtivo e concentração de competências por setor. A gestão da produção adota o Lean Six Sigma, metodologia que combina eliminação de desperdícios com controle estatístico da variabilidade e a Gestão por Processos e Trabalho Padronizado (GPTW), que documenta rotinas operacionais e reduz a dependência de conhecimento tácito individual. A empresa mantém ainda o Setor de Tubos, no SIA, dedicado à fabricação e ao processamento de tubos metálicos para clientes internos e externos.
+
+A organização em galpões especializados já sinaliza o tipo de escala em que essa planta opera: não é uma oficina de protótipos. Projetos compatíveis com essa estrutura tendem a chegar ao mercado com custo mais baixo e prazo mais previsível — não por acaso, mas porque foram pensados dentro das mesmas restrições que o processo impõe.
+
+\section{PROCESSOS OBSERVADOS}
+
+\subsection{Preparação: Desbobinamento e Corte de Chapas}
+
+O ponto de partida de toda a produção da Gravia é a bobina de aço. No Galpão 1, a desbobinadeira converte a bobina em chapa contínua, que é cortada em comprimentos padronizados de 3 m e 6 m, dimensões que correspondem às faixas úteis das prensas dobradeiras disponíveis. Essa compatibilidade entre o comprimento da chapa e a capacidade do equipamento de conformação é resultado de um sistema projetado para minimizar sobras e retrabalho. Para o designer, o dado relevante é simples: componentes dimensionados próximos a 3 m ou 6 m de comprimento são produzidos com eficiência máxima nessa planta; comprimentos intermediários geram sobras ou operações adicionais de ajuste que elevam o custo unitário sem agregar valor ao produto.
+
+\subsection{Corte de Precisão: Sistema a Laser}
+
+O sistema de corte a laser Newton LN 3015F opera com elevada precisão dimensional e permite a programação direta de geometrias complexas via software CAD/CAM. A ausência de ferramental mecânico dedicado significa que o custo de setup para novos formatos é praticamente nulo: qualquer geometria contida na área útil da mesa pode ser produzida a partir de um arquivo digital, sem fabricação de punções ou matrizes específicas. Essa característica torna o laser o processo preferencial para protótipos e séries curtas de peças com recortes intrincados, furos de posicionamento, encaixes ou formas que a guilhotina não consegue produzir.
+
+\textbf{Do ponto de vista projetual:} quando a tolerância dimensional é crítica, o laser é a escolha natural dentro dessa planta. A restrição prática está na espessura: acima de certo limite, a produtividade cai e o custo por metro linear cortado passa a favorecer o plasma.
+
+\subsection{Corte Estrutural: Sistema a Plasma}
+
+Nos Galpões 4, 5 e 6, o sistema de corte a plasma Oxipira Série Master processa chapas em espessuras entre 0,5 mm e 50 mm, com aplicação predominante em componentes estruturais para a construção civil. Em relação ao laser, o plasma oferece maior produtividade para chapas espessas e menor custo operacional por metro linear cortado nessa faixa, ao custo de uma tolerância dimensional inferior. A borda resultante é mais rugosa e, em alguns casos, exige operação de acabamento adicional.
+
+\textbf{Para o designer:} o plasma é a escolha para peças estruturais robustas onde a variação de alguns milímetros é tolerável e o acabamento superficial da borda não é determinante. Para espessuras acima de 15 a 20 mm, é frequentemente a única opção economicamente viável entre os processos de corte térmico disponíveis.
+
+\subsection{Conformação por Dobra: Prensas Dobradeiras}
+
+As prensas dobradeiras hidráulicas constituem o processo central de conformação do aço na Gravia. O Galpão 1 conta com dez unidades distribuídas entre três modelos: quatro prensas Newton PSH-35030 (comprimento útil de aproximadamente 3 m), seis prensas Newton PSH-7030 (comprimento útil de aproximadamente 6 m) e uma prensa hidráulica sincronizada Newton PSH-25030. Os Galpões 4 a 6 abrigam a prensa Newton PSH-55060, com capacidade para peças de até 6 m de comprimento.
+
+O processo consiste no posicionamento da chapa entre punção e matriz, seguido da aplicação de força hidráulica para produzir a deflexão angular desejada. Parâmetros críticos incluem o raio mínimo de dobra (função da espessura e do limite de resistência do material), o retorno elástico após a remoção da carga (\textit{springback}), que deve ser compensado na programação, e os comprimentos mínimos de flange, determinados pelas dimensões do ferramental disponível. Foi o \textit{springback}, aliás, o conceito que mais chamou atenção durante a visita: a chapa ``quer voltar'', e o programador precisa antecipar esse comportamento antes mesmo de apertar o primeiro botão.
+
+A dobra por prensa é um dos processos mais versáteis e economicamente competitivos para componentes em chapa de aço. Perfis abertos em U, L, Z, C e suas combinações são obtidos com uma operação por dobra, e um projeto que decompõe geometrias tridimensionais em sequências de dobras planas compatíveis com os comprimentos de prensa disponíveis é, na prática, um projeto que essa planta consegue fabricar bem.
+
+\subsection{Perfilação Contínua: Galpão 3}
+
+Entre todos os processos observados, a perfilação contínua é o que mais expõe a relação entre processo e modelo de negócio. A perfiladeira recebe a bobina numa extremidade e entrega o perfil acabado pela outra, cortado automaticamente nos comprimentos especificados, a aproximadamente 32 m/min. O equipamento processa espessuras entre 0,9 mm e 5 mm e trabalha bobinas com largura máxima de 1.200 mm. A tesoura rotativa complementa a linha no processamento contínuo.
+
+Os produtos resultantes são trilhos e montantes para drywall, perfis metálicos e tubos de 2'', todos com seção transversal constante ao longo de todo o comprimento — restrição inerente ao processo de conformação por rolos e ao mesmo tempo a razão do seu custo unitário baixo. Componentes de drywall e estruturas metálicas leves são exemplos de produtos concebidos dentro dessa lógica; parte do sucesso comercial desses sistemas construtivos vem justamente da eficiência que a perfilação contínua torna possível.
+
+\textbf{Na prática:} a perfilação só se justifica quando o volume de produção é suficientemente grande para amortizar o ferramental de rolos. Para séries pequenas ou perfis com seção variável, outros processos são mais adequados.
+
+\subsection{Movimentação Interna: Ponte Rolante}
+
+A ponte rolante HTB 1787 percorre os galpões no nível superior, movimentando chapas e componentes metálicos de grande porte. Foi um dos contrastes mais imediatos da visita: o laser operando quase em silêncio no nível do chão, enquanto lá em cima a ponte deslizava carregando peças que nenhum operador moveria com as mãos. Chapas de aço com espessuras acima de alguns milímetros e comprimentos de 3 m a 6 m atingem massas que inviabilizam qualquer outra forma de transporte interno.
+
+\textbf{Implicação projetual:} o peso dos componentes metálicos tem implicações que vão além do produto final. Peças muito pesadas exigem equipamentos de movimentação dedicados, o que pode restringir a flexibilidade de sequenciamento na linha e influenciar diretamente o custo de montagem.
+
+\section{QUADRO SÍNTESE DE EQUIPAMENTOS}
+
+\quadrotitle{1}{Síntese dos equipamentos e processos observados na Gravia Indústria de Perfilados de Aço}
+
+{\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.24\linewidth}
+  >{\raggedright\arraybackslash}p{0.48\linewidth}@{}}
+\toprule
+\textbf{Processo} & \textbf{Equipamento} & \textbf{Relevância para o Designer} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Processo} & \textbf{Equipamento} & \textbf{Relevância para o Designer} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Desbobinamento & Desbobinadeira & Ponto de entrada de toda a produção; define a largura máxima de chapa disponível \\
+Corte a laser & Newton LN 3015F & Liberdade geométrica sem ferramental dedicado; processo indicado para peças de precisão com geometrias complexas \\
+Guilhotina hidráulica & Newton GHN 301911 (3019) & Corte reto em chapas espessas; menor versatilidade geométrica em relação ao laser \\
+Conformação por dobra & Newton PSH-35030 & Perfis abertos (U, L, Z, C) em chapas; peças até 3 m de comprimento útil \\
+Conformação por dobra & Newton PSH-7030 & Perfis abertos (U, L, Z, C) em chapas; peças até 6 m de comprimento útil \\
+Conformação por dobra & Newton PSH-25030 (sinc.) & Operações que exigem controle rigoroso do ângulo de dobra \\
+Conformação por dobra & Newton PSH-55060 & Componentes estruturais de grandes dimensões; comprimento útil até 6 m \\
+Torno mecânico & (s/m) & Suporte à manutenção de dispositivos e ferramental internos \\
+Movimentação & HTB 1787 (ponte rolante) & Logística de chapas e componentes pesados ao longo do fluxo produtivo \\
+Tesoura rotativa & (s/m) & Preparação de bobinas para alimentação da linha de perfilação \\
+Perfilação & Perfiladeira & Perfis de seção constante em série com custo unitário baixo; seção transversal invariável ao longo do comprimento \\
+Corte a plasma & Oxipira Série Master & Componentes estruturais espessos (até 50 mm); menor precisão dimensional que o laser \\
+\end{longtable}}
+
+\quadrofonte{elaborado pelo autor com base em observação \textit{in loco} (2026).}
+
+\section{ANÁLISE: IMPLICAÇÕES PARA O DESIGN DE PRODUTO}
+
+A fabricação em aço abrange uma família de processos com lógicas distintas de custo, precisão e escala. O que a visita à Gravia tornou concreto é que cada escolha projetual sobre o material carrega, embutida, uma escolha sobre como esse material será processado e em que condições econômicas isso se viabiliza.
+
+Definir se um corte será feito a laser ou a plasma, por exemplo, envolve considerar a espessura do material, a tolerância requerida, o volume de produção e o acabamento superficial necessário — variáveis que o designer precisa dominar antes de fechar o desenho, não depois de receber o orçamento. De modo semelhante, a decisão entre obter uma forma tridimensional via dobra sequencial ou via perfilação contínua define modelos de negócio diferentes: a dobra serve à produção flexível de lotes variados; a perfilação exige escala para se pagar.
+
+A padronização dimensional observada na planta (chapas de 3 m e 6 m, prensas com comprimentos úteis correspondentes, perfis com bitolas normalizadas) é o produto de décadas de convergência entre as capacidades dos equipamentos e as demandas do mercado de construção civil. Para o designer que projeta componentes destinados à construção industrializada, alinhar as dimensões do projeto a essas referências reduz custos e aumenta a disponibilidade de fornecedores, uma escolha inteligente de projeto, não uma concessão criativa.
+
+\section{CONCLUSÃO}
+
+A planta da Gravia funciona como um repertório de possibilidades. Cada processo observado representa um conjunto específico de liberdades e limites que o projeto pode explorar ou com os quais precisa negociar, e sair dessa visita sem perceber isso seria desperdiçar o principal aprendizado.
+
+Um designer que conhece o que uma prensa dobradeira de 6 m pode fazer especifica com mais precisão e com mais responsabilidade técnica. O conhecimento dos processos não substitui a criatividade projetual, mas sem ele a criatividade frequentemente projeta o que não pode ser feito, ou o que pode ser feito a um custo que ninguém vai pagar. A visita à Gravia forneceu esse repertório de forma direta e concreta, sem a mediação do texto didático que tende a tornar tudo mais limpo do que é na prática.
+
+\section{REFERÊNCIAS}\label{referencias}
+
+GRAVIA INDÚSTRIA DE PERFILADOS DE AÇO. Visita técnica à unidade industrial de Taguatinga/DF. [Observação direta]. Taguatinga, DF, 02 jun. 2026.
+
+KALPAKJIAN, S.; SCHMID, S. R. \textbf{Manufacturing Engineering and Technology}. 7. ed. Upper Saddle River: Pearson, 2014.
+
+\end{document}
